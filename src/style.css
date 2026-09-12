@@ -92,18 +92,284 @@ body {
   opacity: 0.95;
 }
 
-/* Page content area for scroll testing */
+/* Page content area */
 .page-content {
   position: relative;
   z-index: 1;
-  min-height: 200vh;
   padding-top: var(--nav-height-desktop);
+  overflow-x: clip;
 }
 
-.scroll-test-area {
-  max-width: 1200px;
-  margin: 120px auto;
-  padding: 40px 24px;
+/* ==========================================================================
+   Hero Section Styling
+   ========================================================================== */
+
+.hero-section {
+  position: relative;
+  min-height: calc(100vh - var(--nav-height-desktop));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 48px 60px 48px;
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+/* Eyebrow Pill Badge */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border: 1px solid #ebe9e5;
+  border-radius: var(--radius-full);
+  padding: 9px 18px 9px 14px;
+  box-shadow: 0 1px 2px rgba(23, 24, 28, 0.04);
+  cursor: default;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(23, 24, 28, 0.06);
+}
+
+.badge-icon {
+  flex-shrink: 0;
+}
+
+.hero-badge-text {
+  font-family: var(--font-inter);
+  font-size: 15px;
+  font-weight: 500;
+  color: #33353b;
+  letter-spacing: -0.01em;
+}
+
+/* Headline */
+.hero-title {
+  margin: 40px 0 0 0;
+  font-family: var(--font-inter);
+  font-size: 77px;
+  line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: #17181c;
+  max-width: 980px;
+  text-wrap: balance;
+}
+
+.hero-dot {
+  color: #111318;
+}
+
+/* Supporting Subtitle */
+.hero-subtitle {
+  margin: 30px 0 0 0;
+  font-family: var(--font-inter);
+  font-size: 21px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #43454c;
+  max-width: 660px;
+  text-wrap: balance;
+}
+
+/* Call To Action Buttons */
+.hero-ctas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 44px;
+}
+
+/* Primary CTA Button */
+.hero-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  text-decoration: none;
+  white-space: nowrap;
+  background: #17181c;
+  color: #ffffff;
+  font-family: var(--font-inter);
+  font-size: 16px;
+  font-weight: 600;
+  padding: 16px 28px;
+  border-radius: 12px;
+  border: 1px solid #17181c;
+  box-shadow: 0 1px 2px rgba(23, 24, 28, 0.06);
+  transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.hero-btn-primary:hover {
+  background-color: #000000;
+  border-color: #000000;
+  box-shadow: 0 8px 24px -4px rgba(23, 24, 28, 0.25);
+  transform: translateY(-1px);
+}
+
+.hero-btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Secondary CTA Button */
+.hero-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  white-space: nowrap;
+  color: #17181c;
+  font-family: var(--font-inter);
+  font-size: 16.5px;
+  font-weight: 600;
+  padding: 16px 14px;
+  transition: opacity 0.18s ease, color 0.18s ease;
+}
+
+.hero-btn-secondary:hover {
+  color: #000000;
+  opacity: 0.8;
+}
+
+.hero-arrow {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-btn-primary:hover .hero-arrow,
+.hero-btn-secondary:hover .hero-arrow {
+  transform: translateX(3px);
+}
+
+/* Trusted By Indicator */
+.hero-trust-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  margin-top: 34px;
+  color: #55575e;
+  font-family: var(--font-inter);
+  font-size: 15.5px;
+  font-weight: 500;
+}
+
+.trust-shield-icon {
+  flex-shrink: 0;
+  color: #55575e;
+}
+
+/* Logo Marquee Track */
+.hero-trust-bar {
+  width: 100%;
+  max-width: 1440px;
+  margin-top: 48px;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.marquee-wrapper {
+  overflow: hidden;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee-track {
+  display: inline-flex;
+  align-items: center;
+  will-change: transform;
+  animation: naanoMarquee 26s linear infinite;
+}
+
+.marquee-wrapper:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes naanoMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Case Study Badge Chip */
+.case-study-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #e4e1dc;
+  border-radius: var(--radius-full);
+  padding: 8px 9px 8px 18px;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(23, 24, 28, 0.05);
+  text-decoration: none;
+  margin: 0 36px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.case-study-chip:hover {
+  transform: translateY(-1px);
+  border-color: #d8d4cd;
+  box-shadow: 0 4px 14px rgba(23, 24, 28, 0.08);
+}
+
+.chip-logo {
+  height: 19px;
+  max-width: 120px;
+  object-fit: contain;
+  display: block;
+}
+
+.chip-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(17, 19, 24, 0.06);
+  color: #111318;
+  font-family: var(--font-inter);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 5px 11px;
+  border-radius: var(--radius-full);
+}
+
+/* Partner Logo Items */
+.partner-logo-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 36px;
+  flex-shrink: 0;
+  width: 152px;
+  height: 48px;
+}
+
+.partner-logo {
+  max-height: 42px;
+  max-width: 152px;
+  object-fit: contain;
+  display: block;
+  filter: grayscale(1);
+  opacity: 0.5;
+  transition: filter 0.2s ease, opacity 0.2s ease;
+}
+
+.partner-logo-item:hover .partner-logo {
+  filter: grayscale(0.2);
+  opacity: 0.85;
+}
+
+.logo-blend {
+  mix-blend-mode: multiply;
 }
 
 /* ==========================================================================
@@ -642,5 +908,161 @@ body {
   /* Tuck header action buttons into mobile drawer */
   .nav-actions {
     display: none;
+  }
+
+  /* Hero adjustments for tablet & mobile */
+  .hero-section {
+    padding: 32px 32px 50px 32px;
+  }
+
+  .hero-title {
+    font-size: 56px;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    max-width: 780px;
+    margin-top: 32px;
+  }
+
+  .hero-subtitle {
+    font-size: 19px;
+    max-width: 580px;
+    margin-top: 24px;
+  }
+
+  .hero-ctas {
+    margin-top: 36px;
+    gap: 18px;
+  }
+
+  .hero-trust-indicator {
+    margin-top: 32px;
+  }
+
+  .hero-trust-bar {
+    margin-top: 36px;
+  }
+}
+
+/* Mobile Screens */
+@media (max-width: 768px) {
+  .nav-container {
+    padding: 14px 20px;
+  }
+
+  .nav-logo {
+    height: 26px;
+  }
+
+  /* Tuck header action buttons into mobile drawer */
+  .nav-actions {
+    display: none;
+  }
+
+  .hero-section {
+    padding: 24px 20px 48px 20px;
+    min-height: auto;
+  }
+
+  .hero-badge {
+    padding: 7px 14px 7px 11px;
+    gap: 8px;
+  }
+
+  .hero-badge-text {
+    font-size: 13.5px;
+  }
+
+  .badge-icon.x-icon {
+    width: 13px;
+    height: 13px;
+  }
+
+  .badge-icon.linkedin-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .hero-title {
+    font-size: 38px;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-top: 24px;
+    max-width: 360px;
+  }
+
+  .hero-subtitle {
+    font-size: 17px;
+    line-height: 1.5;
+    margin-top: 18px;
+    padding: 0 6px;
+  }
+
+  .hero-ctas {
+    flex-direction: column;
+    width: 100%;
+    max-width: 360px;
+    gap: 12px;
+    margin-top: 30px;
+  }
+
+  .hero-btn-primary {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 24px;
+    font-size: 15.5px;
+  }
+
+  .hero-btn-secondary {
+    width: 100%;
+    justify-content: center;
+    padding: 10px;
+    font-size: 15.5px;
+  }
+
+  .hero-trust-indicator {
+    font-size: 14px;
+    margin-top: 30px;
+  }
+
+  .hero-trust-bar {
+    margin-top: 28px;
+  }
+
+  .case-study-chip {
+    margin: 0 20px;
+    padding: 6px 8px 6px 14px;
+    gap: 8px;
+  }
+
+  .chip-logo {
+    height: 16px;
+  }
+
+  .chip-tag {
+    font-size: 10px;
+    padding: 4px 9px;
+  }
+
+  .partner-logo-item {
+    padding: 0 20px;
+    width: 120px;
+    height: 40px;
+  }
+
+  .partner-logo {
+    max-height: 32px;
+    max-width: 120px;
+  }
+}
+
+/* Extra Compact Screens */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 34px;
+    letter-spacing: -0.025em;
+  }
+
+  .hero-subtitle {
+    font-size: 16px;
   }
 }

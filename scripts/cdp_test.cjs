@@ -20,8 +20,6 @@ async function run() {
   const wsUrl = await getWsUrl();
   console.log('Connecting to', wsUrl);
 
-  const WebSocket = require('node:events');
-  // We can use native node 22 WebSocket!
   const ws = new globalThis.WebSocket(wsUrl);
 
   let id = 1;
@@ -48,13 +46,43 @@ async function run() {
 
   ws.onopen = async () => {
     try {
-      console.log('CDP WebSocket opened');
+      console.log('CDP WebSocket opened for hero testing');
       await send('Page.enable');
       await send('DOM.enable');
       await send('CSS.enable');
 
-      // 1. Mobile emulation: 390 x 844
-      console.log('1. Setting mobile metrics...');
+      // 1. Desktop: 1440 x 900
+      console.log('1. Capturing Desktop Hero (1440x900)...');
+      await send('Emulation.setDeviceMetricsOverride', {
+        width: 1440,
+        height: 900,
+        deviceScaleFactor: 2,
+        mobile: false
+      });
+      await send('Page.navigate', { url: 'http://localhost:5173' });
+      await new Promise(r => setTimeout(r, 1200));
+
+      let shot = await send('Page.captureScreenshot', { format: 'png' });
+      fs.writeFileSync('scripts/hero_desktop.png', Buffer.from(shot.data, 'base64'));
+      console.log('Saved scripts/hero_desktop.png');
+
+      // 2. Tablet: 768 x 1024
+      console.log('2. Capturing Tablet Hero (768x1024)...');
+      await send('Emulation.setDeviceMetricsOverride', {
+        width: 768,
+        height: 1024,
+        deviceScaleFactor: 2,
+        mobile: true
+      });
+      await send('Page.navigate', { url: 'http://localhost:5173' });
+      await new Promise(r => setTimeout(r, 1000));
+
+      shot = await send('Page.captureScreenshot', { format: 'png' });
+      fs.writeFileSync('scripts/hero_tablet.png', Buffer.from(shot.data, 'base64'));
+      console.log('Saved scripts/hero_tablet.png');
+
+      // 3. Mobile: 390 x 844
+      console.log('3. Capturing Mobile Hero (390x844)...');
       await send('Emulation.setDeviceMetricsOverride', {
         width: 390,
         height: 844,
@@ -64,56 +92,12 @@ async function run() {
       await send('Page.navigate', { url: 'http://localhost:5173' });
       await new Promise(r => setTimeout(r, 1000));
 
-      let shot = await send('Page.captureScreenshot', { format: 'png' });
-      fs.writeFileSync('scripts/verified_mobile_closed.png', Buffer.from(shot.data, 'base64'));
-      console.log('Saved scripts/verified_mobile_closed.png');
-
-      // 2. Click burger button
-      console.log('2. Clicking burger button...');
-      await send('Runtime.evaluate', {
-        expression: `document.getElementById('mobile-burger-btn').click()`
-      });
-      await new Promise(r => setTimeout(r, 500));
-
       shot = await send('Page.captureScreenshot', { format: 'png' });
-      fs.writeFileSync('scripts/verified_mobile_open.png', Buffer.from(shot.data, 'base64'));
-      console.log('Saved scripts/verified_mobile_open.png');
-
-      // 3. Desktop: 1440 x 900
-      console.log('3. Setting desktop metrics...');
-      await send('Emulation.setDeviceMetricsOverride', {
-        width: 1440,
-        height: 900,
-        deviceScaleFactor: 2,
-        mobile: false
-      });
-      await send('Page.navigate', { url: 'http://localhost:5173' });
-      await new Promise(r => setTimeout(r, 1000));
-
-      // 4. Click Resources dropdown
-      console.log('4. Clicking Resources dropdown...');
-      await send('Runtime.evaluate', {
-        expression: `document.getElementById('resources-trigger').click()`
-      });
-      await new Promise(r => setTimeout(r, 500));
-
-      shot = await send('Page.captureScreenshot', { format: 'png' });
-      fs.writeFileSync('scripts/verified_desktop_dropdown.png', Buffer.from(shot.data, 'base64'));
-      console.log('Saved scripts/verified_desktop_dropdown.png');
-
-      // 5. Test scroll state
-      console.log('5. Scrolling down 150px...');
-      await send('Runtime.evaluate', {
-        expression: `window.scrollTo(0, 150)`
-      });
-      await new Promise(r => setTimeout(r, 500));
-
-      shot = await send('Page.captureScreenshot', { format: 'png' });
-      fs.writeFileSync('scripts/verified_desktop_scrolled.png', Buffer.from(shot.data, 'base64'));
-      console.log('Saved scripts/verified_desktop_scrolled.png');
+      fs.writeFileSync('scripts/hero_mobile.png', Buffer.from(shot.data, 'base64'));
+      console.log('Saved scripts/hero_mobile.png');
 
       ws.close();
-      console.log('All CDP verification tests completed successfully!');
+      console.log('All hero screenshots captured successfully!');
       process.exit(0);
     } catch (err) {
       console.error('Error during CDP run:', err);
