@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Naano: B2B LinkedIn Creator Marketplace</title>
+    <meta
+      name="description"
+      content="Naano helps B2B SaaS brands run fixed-price LinkedIn creator campaigns and trace attributed clicks and leads back to each post."
+    />
+    <link rel="icon" type="image/png" href="/naano-logo-nav.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- Main Header Navigation -->
+    <header id="naano-header" class="naano-header" data-surface="hero">
+      <div class="nav-container">
+        <!-- Logo -->
+        <a href="/" class="nav-brand" aria-label="Naano - Return to home">
+          <img
+            src="/naano-logo-nav.png"
+            alt="naano"
+            class="nav-logo"
+            width="128"
+            height="27"
+          />
+        </a>
+
+        <!-- Right Side: Links, Language, CTAs, Burger -->
+        <div class="nav-right">
+          <!-- Desktop Navigation Links -->
+          <nav class="nav-links" aria-label="Primary navigation">
+            <a href="/" class="nav-link">For companies</a>
+            <a href="/creators" class="nav-link">For creators</a>
+            <a href="/agencies" class="nav-link">For agencies</a>
+            <a href="/#how-it-works" class="nav-link">How it works</a>
+
+            <!-- Resources Dropdown -->
+            <div class="nav-dropdown-group" id="resources-group">
+              <button
+                type="button"
+                class="nav-link nav-dropdown-trigger"
+                aria-expanded="false"
+                aria-haspopup="true"
+                id="resources-trigger"
+              >
+                <span>Resources</span>
+                <svg
+                  class="dropdown-chevron"
+                  width="10"
+                  height="10"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <div
+                class="nav-dropdown-menu"
+                id="resources-menu"
+                role="menu"
+                aria-labelledby="resources-trigger"
+              >
+                <a href="/blog" class="dropdown-item" role="menuitem">Blog</a>
+                <a href="/free-tools" class="dropdown-item" role="menuitem">Free Tools</a>
+                <a href="/case-studies/blogseo" class="dropdown-item" role="menuitem">
+                  Case study: BlogSEO
+                </a>
+                <a href="/reports" class="dropdown-item" role="menuitem">Reports</a>
+              </div>
+            </div>
+          </nav>
+
+          <!-- Language Selector -->
+          <div class="nav-lang">
+            <button
+              type="button"
+              class="lang-button"
+              id="lang-toggle-btn"
+              aria-label="Switch language, current English"
+            >
+              <svg
+                class="globe-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                <path d="M2 12h20"></path>
+              </svg>
+              <span class="lang-text-container">
+                <span class="lang-code" id="active-lang">EN</span>
+              </span>
+            </button>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="nav-actions">
+            <a href="/login" class="btn btn-secondary">Sign in</a>
+            <a href="/register" class="btn btn-primary">Sign up</a>
+          </div>
+
+          <!-- Mobile Hamburger Toggle -->
+          <button
+            type="button"
+            class="nav-burger"
+            id="mobile-burger-btn"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="mobile-nav-panel"
+          >
+            <svg
+              class="burger-icon"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <path class="bar-top" d="M4 7h16"></path>
+              <path class="bar-mid" d="M4 12h16"></path>
+              <path class="bar-bot" d="M4 17h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Drawer Panel -->
+      <div
+        class="mobile-nav-panel"
+        id="mobile-nav-panel"
+        aria-hidden="true"
+      >
+        <div class="mobile-nav-inner">
+          <nav class="mobile-nav-links" aria-label="Mobile navigation">
+            <a href="/" class="mobile-nav-item">For companies</a>
+            <a href="/creators" class="mobile-nav-item">For creators</a>
+            <a href="/agencies" class="mobile-nav-item">For agencies</a>
+            <a href="/#how-it-works" class="mobile-nav-item">How it works</a>
+
+            <div class="mobile-nav-subgroup">
+              <span class="mobile-subgroup-title">Resources</span>
+              <a href="/blog" class="mobile-nav-item sub-item">Blog</a>
+              <a href="/free-tools" class="mobile-nav-item sub-item">Free Tools</a>
+              <a href="/case-studies/blogseo" class="mobile-nav-item sub-item">
+                Case study: BlogSEO
+              </a>
+              <a href="/reports" class="mobile-nav-item sub-item">Reports</a>
+            </div>
+          </nav>
+
+          <div class="mobile-nav-footer">
+            <div class="mobile-lang-row">
+              <button
+                type="button"
+                class="lang-button mobile-lang-toggle"
+                aria-label="Switch language"
+              >
+                <svg
+                  class="globe-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                  <path d="M2 12h20"></path>
+                </svg>
+                <span class="lang-code mobile-lang-code">EN</span>
+              </button>
+            </div>
+
+            <div class="mobile-actions">
+              <a href="/login" class="btn btn-secondary mobile-btn">Sign in</a>
+              <a href="/register" class="btn btn-primary mobile-btn">Sign up</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Background scene canvas representing the sky & clouds as in the Naano reference -->
+    <div class="sky-canvas-backdrop" aria-hidden="true">
+      <div class="sky-cloud-container">
+        <img
+          src="/hero-clouds-cotton-blue-v7.png"
+          alt=""
+          class="sky-cloud-image"
+          loading="eager"
+        />
+      </div>
+    </div>
+
+    <!-- Main demo wrapper demonstrating the fixed header and scroll behavior -->
+    <main class="page-content" id="main-content">
+      <!-- Minimalist visual spacer to allow testing scroll state without building the hero -->
+      <div class="scroll-test-area"></div>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

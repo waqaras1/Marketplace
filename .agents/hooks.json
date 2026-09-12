@@ -1,0 +1,28 @@
+{
+  "agent-capture": {
+    "enabled": true,
+    "Stop": [
+      {
+        "type": "command",
+        "command": "python3 /Users/macbook/Downloads/Docs/naano-clone/scripts/capture.py"
+      }
+    ],
+    "PostInvocation": [
+      {
+        "type": "command",
+        "command": "python3 /Users/macbook/Downloads/Docs/naano-clone/scripts/capture.py"
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /Users/macbook/Downloads/Docs/naano-clone/scripts/capture.py"
+          }
+        ]
+      }
+    ]
+  }
+}
