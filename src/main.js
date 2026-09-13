@@ -168,4 +168,55 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  /* -------------------------------------------------------------------------- */
+  /* 5. Zmirov Testimonial Scroll-Triggered Text Reveal                          */
+  /* -------------------------------------------------------------------------- */
+  const initQuoteScrollAnimation = () => {
+    const quoteSec = document.querySelector('[data-screen-label="Quote"]');
+    if (!quoteSec) return;
+
+    const words = quoteSec.querySelectorAll('[data-qw]');
+    if (!words.length) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (prefersReducedMotion.matches) {
+      words.forEach((w) => {
+        w.style.opacity = '1';
+      });
+      return;
+    }
+
+    const updateQuoteScroll = () => {
+      const rect = quoteSec.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const range = Math.max(0.8 * vh, 1);
+      let raw = (0.72 * vh - rect.top) / range;
+
+      // Seamlessly support both standalone view (current step) and multi-section page
+      const maxScroll = document.documentElement.scrollHeight - vh;
+      if (maxScroll > 0) {
+        const bottomRatio = window.scrollY / maxScroll;
+        raw = Math.max(raw, bottomRatio);
+      }
+
+      const progress = Math.max(0, Math.min(1, raw)) * (words.length + 0.65);
+
+      words.forEach((word, idx) => {
+        const localProg = Math.max(0, Math.min(1, progress - idx));
+        // Smoothstep interpolation matching Naano's native algorithm
+        const smooth = localProg * localProg * (3 - 2 * localProg);
+        const opacity = 0.14 + smooth * 0.86;
+        word.style.opacity = opacity.toFixed(3);
+      });
+    };
+
+    window.addEventListener('scroll', updateQuoteScroll, { passive: true });
+    window.addEventListener('resize', updateQuoteScroll, { passive: true });
+    updateQuoteScroll();
+  };
+
+  initQuoteScrollAnimation();
+
+
 });
