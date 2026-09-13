@@ -11,7 +11,6 @@ async function getWsUrl() {
         const page = list.find(p => p.type === 'page' && p.url.includes('5173'));
         if (page) resolve(page.webSocketDebuggerUrl);
         else {
-          // Fallback to any page
           const anyPage = list.find(p => p.type === 'page');
           if (anyPage) resolve(anyPage.webSocketDebuggerUrl);
           else reject(new Error('No browser page found on port 9222'));
@@ -54,13 +53,54 @@ async function run() {
       await send('Page.enable');
       await send('Runtime.enable');
 
-      // Navigate to register.html
-      console.log('Navigating to http://localhost:5173/register.html...');
+      // -------------------------------------------------------------
+      // 1. Brand Onboarding Flow (Image 2 Reference)
+      // -------------------------------------------------------------
+      console.log('1. Testing Brand Flow...');
       await send('Page.navigate', { url: 'http://localhost:5173/register.html' });
+      await new Promise(r => setTimeout(r, 1000));
+
+      await send('Emulation.setDeviceMetricsOverride', {
+        width: 1440,
+        height: 900,
+        deviceScaleFactor: 2,
+        mobile: false
+      });
+      await new Promise(r => setTimeout(r, 400));
+
+      // Click brand role
+      await send('Runtime.evaluate', { expression: `document.getElementById('role-card-brand').click();` });
+      await new Promise(r => setTimeout(r, 400));
+
+      // Click OAuth button to enter Step 2 of 3
+      await send('Runtime.evaluate', { expression: `document.getElementById('btn-brand-oauth-google').click();` });
+      await new Promise(r => setTimeout(r, 600));
+
+      // Capture desktop brand onboarding (Step 2 of 3)
+      const brandOnboardingDesk = await send('Page.captureScreenshot', { format: 'png' });
+      fs.writeFileSync('scripts/brand_onboarding_desktop.png', Buffer.from(brandOnboardingDesk.data, 'base64'));
+      console.log('Saved scripts/brand_onboarding_desktop.png');
+
+      // Capture mobile brand onboarding (Step 2 of 3)
+      await send('Emulation.setDeviceMetricsOverride', {
+        width: 390,
+        height: 844,
+        deviceScaleFactor: 2,
+        mobile: true
+      });
+      await new Promise(r => setTimeout(r, 500));
+      const brandOnboardingMob = await send('Page.captureScreenshot', { format: 'png' });
+      fs.writeFileSync('scripts/brand_onboarding_mobile.png', Buffer.from(brandOnboardingMob.data, 'base64'));
+      console.log('Saved scripts/brand_onboarding_mobile.png');
+
+      // -------------------------------------------------------------
+      // 2. Creator Flow to Workspace (Image 1 Reference)
+      // -------------------------------------------------------------
+      console.log('2. Testing Creator Workspace...');
+      await send('Page.navigate', { url: 'http://localhost:5173/workspace.html' });
       await new Promise(r => setTimeout(r, 1200));
 
-      // 1. Desktop: 1440 x 900
-      console.log('1. Setting desktop viewport (1440x900)...');
+      // Desktop: 1440 x 900
       await send('Emulation.setDeviceMetricsOverride', {
         width: 1440,
         height: 900,
@@ -69,13 +109,11 @@ async function run() {
       });
       await new Promise(r => setTimeout(r, 500));
 
-      // Capture desktop role selection
-      const deskShot = await send('Page.captureScreenshot', { format: 'png' });
-      fs.writeFileSync('scripts/register_desktop_role_select.png', Buffer.from(deskShot.data, 'base64'));
-      console.log('Saved scripts/register_desktop_role_select.png');
+      const wsDesk = await send('Page.captureScreenshot', { format: 'png' });
+      fs.writeFileSync('scripts/creator_workspace_desktop.png', Buffer.from(wsDesk.data, 'base64'));
+      console.log('Saved scripts/creator_workspace_desktop.png');
 
-      // 2. Mobile: 390 x 844
-      console.log('2. Setting mobile viewport (390x844)...');
+      // Mobile: 390 x 844
       await send('Emulation.setDeviceMetricsOverride', {
         width: 390,
         height: 844,
@@ -84,42 +122,9 @@ async function run() {
       });
       await new Promise(r => setTimeout(r, 500));
 
-      const mobShot = await send('Page.captureScreenshot', { format: 'png' });
-      fs.writeFileSync('scripts/register_mobile_role_select.png', Buffer.from(mobShot.data, 'base64'));
-      console.log('Saved scripts/register_mobile_role_select.png');
-
-      // 3. Switch back to Desktop and trigger Creator flow
-      console.log('3. Triggering Creator Flow (desktop)...');
-      await send('Emulation.setDeviceMetricsOverride', {
-        width: 1440,
-        height: 900,
-        deviceScaleFactor: 2,
-        mobile: false
-      });
-      await send('Runtime.evaluate', {
-        expression: `document.getElementById('role-card-creator').click();`
-      });
-      await new Promise(r => setTimeout(r, 600));
-
-      const creatorShot = await send('Page.captureScreenshot', { format: 'png' });
-      fs.writeFileSync('scripts/register_creator_flow.png', Buffer.from(creatorShot.data, 'base64'));
-      console.log('Saved scripts/register_creator_flow.png');
-
-      // 4. Trigger Brand flow
-      console.log('4. Triggering Brand Flow (desktop)...');
-      await send('Runtime.evaluate', {
-        expression: `
-          document.getElementById('back-from-creator').click();
-          setTimeout(() => {
-            document.getElementById('role-card-brand').click();
-          }, 300);
-        `
-      });
-      await new Promise(r => setTimeout(r, 800));
-
-      const brandShot = await send('Page.captureScreenshot', { format: 'png' });
-      fs.writeFileSync('scripts/register_brand_flow.png', Buffer.from(brandShot.data, 'base64'));
-      console.log('Saved scripts/register_brand_flow.png');
+      const wsMob = await send('Page.captureScreenshot', { format: 'png' });
+      fs.writeFileSync('scripts/creator_workspace_mobile.png', Buffer.from(wsMob.data, 'base64'));
+      console.log('Saved scripts/creator_workspace_mobile.png');
 
       ws.close();
       process.exit(0);

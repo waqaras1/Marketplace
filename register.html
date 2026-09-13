@@ -20,8 +20,8 @@
   <body>
     <div class="auth-page">
       <!-- Left: Interactive Form & Flow Container -->
-      <main class="auth-left">
-        <div class="auth-left-inner">
+      <main class="auth-left" id="auth-left-container">
+        <div class="auth-left-inner" id="auth-left-inner">
           <!-- Top Row: Logo & Language Selector -->
           <div class="auth-header-row">
             <a href="/" class="auth-logo-link" aria-label="Go to Naano Home">
@@ -55,7 +55,9 @@
             </button>
           </div>
 
-          <!-- Flow View 1: Role Selection (Default Screen) -->
+          <!-- ============================================================
+               VIEW 1: ROLE SELECTION (Default Landing View)
+               ============================================================ -->
           <div id="view-role-select" class="auth-view is-active">
             <h1 class="auth-title">Create your account</h1>
             <p class="auth-subtitle">First, who are you here as?</p>
@@ -96,9 +98,11 @@
             </p>
           </div>
 
-          <!-- Flow View 2: Creator Sign-up Steps -->
-          <div id="view-creator-flow" class="auth-view" aria-hidden="true">
-            <button type="button" class="auth-back-link" id="back-from-creator">
+          <!-- ============================================================
+               CREATOR FLOW - STEP 1: AUTHENTICATION
+               ============================================================ -->
+          <div id="view-creator-auth" class="auth-view" aria-hidden="true">
+            <button type="button" class="auth-back-link" id="back-from-creator-auth">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="19" y1="12" x2="5" y2="12"></line>
                 <polyline points="12 19 5 12 12 5"></polyline>
@@ -113,14 +117,14 @@
             </p>
 
             <div class="auth-oauth-group">
-              <button type="button" class="auth-oauth-btn auth-oauth-btn--linkedin">
+              <button type="button" class="auth-oauth-btn auth-oauth-btn--linkedin" id="btn-creator-oauth-linkedin">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="#0A66C2" aria-hidden="true">
                   <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
                 </svg>
                 <span>Sign up with LinkedIn</span>
               </button>
 
-              <button type="button" class="auth-oauth-btn auth-oauth-btn--google">
+              <button type="button" class="auth-oauth-btn auth-oauth-btn--google" id="btn-creator-oauth-google">
                 <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
                   <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                   <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -130,7 +134,7 @@
                 <span>Sign up with Google</span>
               </button>
 
-              <button type="button" class="auth-oauth-btn auth-oauth-btn--email">
+              <button type="button" class="auth-oauth-btn auth-oauth-btn--email" id="btn-creator-oauth-email">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <rect width="20" height="16" x="2" y="4" rx="2"/>
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
@@ -145,9 +149,168 @@
             </p>
           </div>
 
-          <!-- Flow View 3: Brand Sign-up Steps -->
-          <div id="view-brand-flow" class="auth-view" aria-hidden="true">
-            <button type="button" class="auth-back-link" id="back-from-brand">
+          <!-- ============================================================
+               CREATOR FLOW - STEP 2: PROFILE & PRICING
+               ============================================================ -->
+          <div id="view-creator-profile" class="auth-view" aria-hidden="true">
+            <button type="button" class="auth-back-link" id="back-from-creator-profile">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
+              <span>Back</span>
+            </button>
+
+            <div class="auth-step-badge">STEP 2 OF 4</div>
+            <h1 class="auth-title">Link your LinkedIn</h1>
+            <p class="auth-subtitle">
+              We'll import your public stats, calculate audience fit, and generate your live card.
+            </p>
+
+            <form class="auth-form" id="form-creator-profile">
+              <div class="auth-field">
+                <label for="creator-input-url" class="auth-label">LinkedIn Profile URL</label>
+                <div class="auth-input-group">
+                  <span class="auth-input-prefix">linkedin.com/in/</span>
+                  <input
+                    type="text"
+                    id="creator-input-url"
+                    class="auth-input auth-input--prefixed"
+                    value="waqaras1"
+                    placeholder="your-handle"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="auth-field">
+                <label for="creator-input-name" class="auth-label">Full Name</label>
+                <input
+                  type="text"
+                  id="creator-input-name"
+                  class="auth-input"
+                  value="Waqar Ahmed"
+                  placeholder="Your full name"
+                  required
+                />
+              </div>
+
+              <div class="auth-field">
+                <label for="creator-input-tags" class="auth-label">Content Topics</label>
+                <input
+                  type="text"
+                  id="creator-input-tags"
+                  class="auth-input"
+                  value="Software · AI · SaaS"
+                  placeholder="e.g. B2B SaaS · Growth · Marketing"
+                  required
+                />
+              </div>
+
+              <div class="auth-field">
+                <label for="creator-input-price" class="auth-label">Fixed Price per Sponsored Post</label>
+                <div class="auth-input-group">
+                  <span class="auth-input-prefix">€</span>
+                  <input
+                    type="number"
+                    id="creator-input-price"
+                    class="auth-input auth-input--prefixed"
+                    value="30"
+                    min="10"
+                    max="5000"
+                    required
+                  />
+                  <span class="auth-input-suffix">/ post</span>
+                </div>
+                <span class="auth-field-hint">You can change your rate anytime from your workspace.</span>
+              </div>
+
+              <button type="submit" class="auth-submit-btn" id="btn-submit-creator-profile">
+                <span>Analyze Profile & Generate Card</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </button>
+            </form>
+          </div>
+
+          <!-- ============================================================
+               CREATOR FLOW - STEP 3: SYNCING ANIMATION
+               ============================================================ -->
+          <div id="view-creator-sync" class="auth-view" aria-hidden="true">
+            <div class="auth-step-badge">STEP 3 OF 4</div>
+            <h1 class="auth-title">Building your card</h1>
+            <p class="auth-subtitle">Importing LinkedIn data and calculating performance scores...</p>
+
+            <div class="auth-sync-box">
+              <div class="auth-sync-bar-track">
+                <div class="auth-sync-bar-fill" id="creator-sync-progress"></div>
+              </div>
+              <div class="auth-sync-percentage" id="creator-sync-pct">0%</div>
+
+              <ul class="auth-sync-steps">
+                <li class="auth-sync-step is-done" id="step-sync-1">
+                  <span class="auth-sync-icon">✓</span>
+                  <span>Importing public LinkedIn profile (Waqar Ahmed)</span>
+                </li>
+                <li class="auth-sync-step" id="step-sync-2">
+                  <span class="auth-sync-icon">⋯</span>
+                  <span>Verifying 1.1K LinkedIn followers & network reach</span>
+                </li>
+                <li class="auth-sync-step" id="step-sync-3">
+                  <span class="auth-sync-icon">⋯</span>
+                  <span>Analyzing post history and dominant B2B topics</span>
+                </li>
+                <li class="auth-sync-step" id="step-sync-4">
+                  <span class="auth-sync-icon">⋯</span>
+                  <span>Setting chosen fixed rate to €30 / post</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               CREATOR FLOW - STEP 4: CARD COMPLETE & WORKSPACE LAUNCH
+               ============================================================ -->
+          <div id="view-creator-complete" class="auth-view" aria-hidden="true">
+            <div class="auth-step-badge">STEP 4 OF 4 · SUCCESS</div>
+            <h1 class="auth-title">Your card is live!</h1>
+            <p class="auth-subtitle">
+              Brands can now find you in the marketplace, review your audience fit, and book campaigns.
+            </p>
+
+            <div class="auth-complete-card">
+              <div class="auth-complete-avatar">
+                <img src="/avatar-waqar.png" alt="Waqar Ahmed" class="auth-complete-img" />
+              </div>
+              <div class="auth-complete-info">
+                <div class="auth-complete-name">Waqar Ahmed</div>
+                <div class="auth-complete-topics">Software · AI · SaaS</div>
+                <div class="auth-complete-stats">1.1K Followers · €30 / post</div>
+              </div>
+            </div>
+
+            <div class="auth-cta-stack">
+              <a href="/workspace.html" class="auth-submit-btn auth-submit-btn--success" id="btn-enter-workspace">
+                <span>Enter Creator Workspace</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </a>
+
+              <a href="/register" class="auth-secondary-btn" id="btn-restart-flow">
+                <span>Return to Home</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               BRAND FLOW - STEP 1: AUTHENTICATION
+               ============================================================ -->
+          <div id="view-brand-auth" class="auth-view" aria-hidden="true">
+            <button type="button" class="auth-back-link" id="back-from-brand-auth">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="19" y1="12" x2="5" y2="12"></line>
                 <polyline points="12 19 5 12 12 5"></polyline>
@@ -162,14 +325,14 @@
             </p>
 
             <div class="auth-oauth-group">
-              <button type="button" class="auth-oauth-btn auth-oauth-btn--linkedin">
+              <button type="button" class="auth-oauth-btn auth-oauth-btn--linkedin" id="btn-brand-oauth-linkedin">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="#0A66C2" aria-hidden="true">
                   <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
                 </svg>
                 <span>Sign up with LinkedIn</span>
               </button>
 
-              <button type="button" class="auth-oauth-btn auth-oauth-btn--google">
+              <button type="button" class="auth-oauth-btn auth-oauth-btn--google" id="btn-brand-oauth-google">
                 <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
                   <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                   <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -179,7 +342,7 @@
                 <span>Sign up with Google</span>
               </button>
 
-              <button type="button" class="auth-oauth-btn auth-oauth-btn--email">
+              <button type="button" class="auth-oauth-btn auth-oauth-btn--email" id="btn-brand-oauth-email">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <rect width="20" height="16" x="2" y="4" rx="2"/>
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
@@ -192,6 +355,214 @@
               Already have an account?
               <a href="/login?reauth=1" class="auth-signin-link">Sign in here</a>
             </p>
+          </div>
+
+          <!-- ============================================================
+               BRAND FLOW - STEP 2 OF 3: VALUE PROP & ICP (Image 2 Reference)
+               ============================================================ -->
+          <div id="view-brand-onboarding" class="auth-view" aria-hidden="true">
+            <!-- Top Step Indicator Row -->
+            <div class="brand-step-header">
+              <span class="brand-step-text">Step 2 of 3</span>
+              <div class="brand-step-bars">
+                <span class="brand-step-bar is-active"></span>
+                <span class="brand-step-bar is-active"></span>
+                <span class="brand-step-bar"></span>
+              </div>
+            </div>
+
+            <!-- Brand Identifier Header -->
+            <div class="brand-id-row">
+              <div class="brand-id-avatar">A</div>
+              <div>
+                <h1 class="brand-id-title">Value prop &amp; ICP</h1>
+                <div class="brand-id-name">Atlas Marketing</div>
+              </div>
+            </div>
+
+            <p class="brand-id-sub">
+              Review these details once. Naano turns them into a brief for your creators.
+            </p>
+
+            <!-- Section 1: Value Proposition -->
+            <div class="brand-section">
+              <div class="brand-section-eyebrow">VALUE PROPOSITION</div>
+              <div class="brand-section-desc">
+                What the company does, for whom, how — 4 to 6 sentences. Edit if needed.
+              </div>
+              <textarea
+                class="brand-textarea"
+                rows="5"
+                id="brand-val-prop"
+              >than months, with transparent Fiverr-backed delivery and buyer protection. Atlas owns accountability for results: booked jobs and ringing phones, not vanity metrics, with continuous weekly optimization and clear ROI reporting.</textarea>
+            </div>
+
+            <!-- Section 2: 3 Ideal Customers (ICP) -->
+            <div class="brand-section">
+              <div class="brand-section-eyebrow">3 IDEAL CUSTOMERS (ICP)</div>
+              <div class="brand-section-desc">The audiences your creators need to understand.</div>
+
+              <div class="brand-icp-grid">
+                <!-- ICP 1 -->
+                <div class="brand-icp-card">
+                  <div class="brand-icp-num">1</div>
+                  <div class="brand-icp-title">HVAC Business Owner</div>
+                  <p class="brand-icp-text">
+                    Owns or operates a small-to-mid-size HVAC company (1–50...
+                  </p>
+                </div>
+
+                <!-- ICP 2 -->
+                <div class="brand-icp-card">
+                  <div class="brand-icp-num">2</div>
+                  <div class="brand-icp-title">Roofing Contractor</div>
+                  <p class="brand-icp-text">
+                    Runs a roofing company (5–100 employees) that relies on storm-triggere...
+                  </p>
+                </div>
+
+                <!-- ICP 3 -->
+                <div class="brand-icp-card">
+                  <div class="brand-icp-num">3</div>
+                  <div class="brand-icp-title">Plumbing Service Manager</div>
+                  <p class="brand-icp-text">
+                    Manages marketing and customer acquisition for a plumbing business (3–7...
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 3: Starter Creator Brief -->
+            <div class="brand-brief-box">
+              <div class="brand-brief-top">
+                <div class="brand-brief-title-wrap">
+                  <img src="/logo.svg" alt="Naano" class="brand-brief-logo" />
+                  <div>
+                    <div class="brand-brief-eyebrow">STARTER CREATOR BRIEF</div>
+                    <div class="brand-brief-headline">What your creators will receive</div>
+                  </div>
+                </div>
+                <div class="brand-brief-badge">✓ Ready</div>
+              </div>
+
+              <!-- Inner Card -->
+              <div class="brand-brief-inner-card">
+                <div class="brand-brief-brand-name">Atlas Marketing</div>
+
+                <div class="brand-brief-field">
+                  <div class="brand-brief-label">PRODUCT</div>
+                  <p class="brand-brief-val">
+                    Atlas Marketing is a unified marketing partner built specifically for US service businesses in trades like HVAC, roofing, plumbing, and electrical....
+                  </p>
+                </div>
+
+                <div class="brand-brief-field">
+                  <div class="brand-brief-label">AUDIENCE</div>
+                  <p class="brand-brief-val">
+                    HVAC Business Owner · Roofing Contractor · Plumbing Service Manager
+                  </p>
+                </div>
+
+                <div class="brand-brief-callout">
+                  <span class="brand-brief-sparkle">✦</span>
+                  <p class="brand-brief-callout-text">
+                    Creators can adapt the angle to their expertise, while keeping every product claim factual.
+                  </p>
+                </div>
+              </div>
+
+              <div class="brand-brief-footnote">
+                ↗ Every creator you invite will receive this brief. You can edit it later from Campaigns.
+              </div>
+            </div>
+
+            <!-- Footer Action Buttons -->
+            <div class="brand-action-row">
+              <button type="button" class="auth-btn-secondary" id="back-from-brand-onboarding">
+                Back
+              </button>
+              <button type="button" class="auth-btn-primary" id="btn-continue-ai-matching">
+                Continue to AI Matching
+              </button>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               BRAND FLOW - STEP 3 OF 3: AI MATCHING DASHBOARD
+               ============================================================ -->
+          <div id="view-brand-matching" class="auth-view" aria-hidden="true">
+            <div class="brand-step-header">
+              <span class="brand-step-text">Step 3 of 3</span>
+              <div class="brand-step-bars">
+                <span class="brand-step-bar is-active"></span>
+                <span class="brand-step-bar is-active"></span>
+                <span class="brand-step-bar is-active"></span>
+              </div>
+            </div>
+
+            <h1 class="auth-title">Matched Creators for Atlas Marketing</h1>
+            <p class="auth-subtitle">
+              We identified 3 vetted creators whose audience directly aligns with your ICPs.
+            </p>
+
+            <div class="brand-matched-list">
+              <!-- Matched 1 -->
+              <div class="brand-match-card">
+                <div class="brand-match-avatar-col">
+                  <img src="/avatar-vincent-josse.png" alt="Vincent Josse" class="brand-match-avatar" />
+                  <span class="brand-match-score">98% Fit</span>
+                </div>
+                <div class="brand-match-info">
+                  <div class="brand-match-name">Vincent Josse</div>
+                  <div class="brand-match-headline">B2B Growth Advisor · SaaS &amp; Commercial Services</div>
+                  <div class="brand-match-stats">48K Followers · 12.5K Avg. Reach · €450 / post</div>
+                </div>
+                <button type="button" class="brand-match-invite-btn" onclick="this.textContent = 'Invite Sent ✓'; this.classList.add('is-sent');">
+                  Invite to Campaign
+                </button>
+              </div>
+
+              <!-- Matched 2 -->
+              <div class="brand-match-card">
+                <div class="brand-match-avatar-col">
+                  <img src="/avatar-waqar.png" alt="Waqar Ahmed" class="brand-match-avatar" />
+                  <span class="brand-match-score">96% Fit</span>
+                </div>
+                <div class="brand-match-info">
+                  <div class="brand-match-name">Waqar Ahmed</div>
+                  <div class="brand-match-headline">AI Full Stack Engineer | Software &amp; B2B Automation</div>
+                  <div class="brand-match-stats">1.1K Followers · 4.8% Engagement · €30 / post</div>
+                </div>
+                <button type="button" class="brand-match-invite-btn" onclick="this.textContent = 'Invite Sent ✓'; this.classList.add('is-sent');">
+                  Invite to Campaign
+                </button>
+              </div>
+
+              <!-- Matched 3 -->
+              <div class="brand-match-card">
+                <div class="brand-match-avatar-col">
+                  <img src="/photo-david-zmirov.png" alt="David Zmirov" class="brand-match-avatar" />
+                  <span class="brand-match-score">94% Fit</span>
+                </div>
+                <div class="brand-match-info">
+                  <div class="brand-match-name">David Zmirov</div>
+                  <div class="brand-match-headline">Founder @ Zmirov · Commercial Trade Marketing</div>
+                  <div class="brand-match-stats">12.4K Followers · 3.2K Avg. Reach · €280 / post</div>
+                </div>
+                <button type="button" class="brand-match-invite-btn" onclick="this.textContent = 'Invite Sent ✓'; this.classList.add('is-sent');">
+                  Invite to Campaign
+                </button>
+              </div>
+            </div>
+
+            <div class="brand-action-row" style="margin-top: 24px;">
+              <button type="button" class="auth-btn-secondary" id="back-from-brand-matching">
+                Back to Brief
+              </button>
+              <a href="/" class="auth-btn-primary">
+                Launch Campaign Dashboard →
+              </a>
+            </div>
           </div>
         </div>
       </main>
@@ -226,34 +597,34 @@
             </div>
 
             <div class="creator-card-avatar-wrap">
-              <div class="creator-card-avatar">Y</div>
+              <img src="/avatar-waqar.png" alt="Waqar Ahmed" class="creator-card-avatar-photo" id="right-creator-avatar" />
             </div>
 
             <div class="creator-card-body">
-              <h3 class="creator-card-name">Your name</h3>
-              <p class="creator-card-headline">
+              <h3 class="creator-card-name" id="right-creator-name">Waqar Ahmed</h3>
+              <p class="creator-card-headline" id="right-creator-headline">
                 Your LinkedIn headline and topics will appear here.
               </p>
 
               <div class="creator-card-progress">
                 <span class="creator-card-progress-label">Data</span>
                 <div class="creator-card-progress-bar">
-                  <div class="creator-card-progress-fill"></div>
+                  <div class="creator-card-progress-fill" id="right-creator-progress"></div>
                 </div>
-                <span class="creator-card-progress-status">Pending</span>
+                <span class="creator-card-progress-status" id="right-creator-status">Pending</span>
               </div>
 
               <div class="creator-card-stats-grid">
                 <div class="creator-card-stat">
-                  <div class="creator-card-stat-val">—</div>
+                  <div class="creator-card-stat-val" id="right-stat-followers">1.1K</div>
                   <div class="creator-card-stat-lbl">Followers</div>
                 </div>
                 <div class="creator-card-stat">
-                  <div class="creator-card-stat-val">—</div>
+                  <div class="creator-card-stat-val" id="right-stat-impressions">—</div>
                   <div class="creator-card-stat-lbl">Est. impressions</div>
                 </div>
                 <div class="creator-card-stat">
-                  <div class="creator-card-stat-val">—</div>
+                  <div class="creator-card-stat-val" id="right-stat-price">€30</div>
                   <div class="creator-card-stat-lbl">Cost / post</div>
                 </div>
               </div>
@@ -272,6 +643,20 @@
           </div>
         </div>
       </aside>
+    </div>
+
+    <!-- Floating bottom pill when in Brand onboarding -->
+    <div class="brand-floating-pill" id="brand-floating-assistant" style="display: none;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3Z"/>
+      </svg>
+      <span>What would you like to see?</span>
+      <div class="brand-pill-mic">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+        </svg>
+      </div>
     </div>
 
     <script type="module" src="/src/register.js"></script>

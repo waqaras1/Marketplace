@@ -1,0 +1,938 @@
+/* ==========================================================================
+   Naano Creator Workspace Styles
+   Exact reproduction of recon/overview-creator.png
+   ========================================================================== */
+
+:root {
+  --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-jakarta: 'Plus Jakarta Sans', var(--font-inter);
+
+  --color-blue-primary: #2563eb;
+  --color-blue-hover: #1d4ed8;
+  --color-blue-tint: #eff6ff;
+
+  --color-text-main: #111827;
+  --color-text-secondary: #4b5563;
+  --color-text-muted: #6b7280;
+  --color-border-subtle: #e5e7eb;
+  --color-border-card: #eaedf2;
+
+  --color-bg-page: #fbfcfd;
+  --color-bg-card: #ffffff;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-inter);
+  background-color: var(--color-bg-page);
+  color: var(--color-text-main);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --------------------------------------------------------------------------
+   Workspace Layout & Sidebar
+   -------------------------------------------------------------------------- */
+.ws-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.ws-sidebar {
+  width: 68px;
+  background-color: #ffffff;
+  border-right: 1px solid var(--color-border-subtle);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 0;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 40;
+}
+
+.ws-sidebar-brand {
+  margin-bottom: 24px;
+}
+
+.ws-sidebar-logo {
+  height: 24px;
+  width: auto;
+  display: block;
+}
+
+.ws-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  align-items: center;
+}
+
+.ws-nav-item {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ws-nav-item:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
+.ws-nav-item.is-active {
+  background-color: var(--color-blue-tint);
+  color: var(--color-blue-primary);
+}
+
+/* --------------------------------------------------------------------------
+   Top Navbar
+   -------------------------------------------------------------------------- */
+.ws-main-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  position: relative;
+  padding-bottom: 96px;
+}
+
+.ws-topbar {
+  height: 64px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+.ws-topbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.ws-back-register {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.ws-back-register:hover {
+  color: var(--color-blue-primary);
+}
+
+.ws-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ws-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 8px;
+  background-color: #ffffff;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.ws-lang-pill {
+  padding: 2px;
+  gap: 2px;
+}
+
+.ws-lang-opt {
+  border: none;
+  background: transparent;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #64748b;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ws-lang-opt.is-active {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
+.ws-icon-btn {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #4b5563;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ws-icon-btn:hover {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+.ws-user-avatar-wrap {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.ws-user-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.ws-user-online-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: #22c55e;
+  border: 1.5px solid #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   Workspace Content
+   -------------------------------------------------------------------------- */
+.ws-content {
+  padding: 32px;
+  max-width: 1360px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.ws-page-header {
+  margin-bottom: 24px;
+}
+
+.ws-eyebrow {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.ws-title {
+  font-family: var(--font-jakarta);
+  font-size: clamp(26px, 2.5vw, 32px);
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.ws-subtitle {
+  font-size: 14.5px;
+  color: #6b7280;
+}
+
+/* --------------------------------------------------------------------------
+   KPI Metrics Row
+   -------------------------------------------------------------------------- */
+.ws-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.ws-metric-card {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-card);
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.ws-metric-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ws-metric-icon {
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+.ws-metric-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.ws-metric-value {
+  font-family: var(--font-jakarta);
+  font-size: 26px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 4px;
+}
+
+.ws-metric-desc {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* --------------------------------------------------------------------------
+   2-Column Layout
+   -------------------------------------------------------------------------- */
+.ws-two-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.ws-col-left, .ws-col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Panel Containers */
+.ws-panel {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-card);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.ws-panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 16px;
+}
+
+.ws-panel-title {
+  font-family: var(--font-jakarta);
+  font-size: 17px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 3px;
+}
+
+.ws-panel-sub {
+  font-size: 13.5px;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+.ws-panel-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.ws-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.ws-btn-secondary {
+  border: 1px solid var(--color-border-subtle);
+  background-color: #ffffff;
+  color: #374151;
+}
+
+.ws-btn-secondary:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.ws-btn-primary {
+  border: none;
+  background-color: var(--color-blue-primary);
+  color: #ffffff;
+}
+
+.ws-btn-primary:hover {
+  background-color: var(--color-blue-hover);
+}
+
+.ws-link-blue {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--color-blue-primary);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+  white-space: nowrap;
+}
+
+.ws-link-blue:hover {
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   Physical Creator Card Mockup
+   -------------------------------------------------------------------------- */
+.ws-card-mockup-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 12px 0;
+}
+
+.ws-card-mockup {
+  width: 100%;
+  max-width: 440px;
+  background-color: #ffffff;
+  border-radius: 28px;
+  box-shadow: 0 20px 48px -12px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(226, 232, 240, 0.85);
+  overflow: hidden;
+  position: relative;
+}
+
+.ws-card-banner {
+  height: 126px;
+  background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);
+  position: relative;
+  padding: 16px 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.ws-card-banner::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -20px;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.ws-card-in-badge {
+  width: 32px;
+  height: 32px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 15px;
+  color: #0a66c2;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.ws-card-brand {
+  color: #ffffff;
+  font-family: var(--font-jakarta);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+
+.ws-card-banner-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ws-card-flag-badge {
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.ws-card-icon-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ws-card-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.ws-card-avatar-container {
+  position: absolute;
+  top: 86px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  background-color: #f1f5f9;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.ws-card-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ws-card-body {
+  padding: 52px 24px 24px;
+  text-align: center;
+}
+
+.ws-card-name {
+  font-family: var(--font-jakarta);
+  font-size: 22px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.ws-card-tags {
+  font-size: 13.5px;
+  color: #4b5563;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.ws-card-headline {
+  font-size: 13.5px;
+  color: #4b5563;
+  line-height: 1.45;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+.ws-card-calendar-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #64748b;
+  background-color: #f1f5f9;
+  padding: 6px 12px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+}
+
+.ws-card-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12.5px;
+  color: #64748b;
+  margin-bottom: 22px;
+  padding: 0 8px;
+}
+
+.ws-card-progress-track {
+  flex: 1;
+  height: 6px;
+  background-color: #e2e8f0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.ws-card-progress-fill {
+  width: 32%;
+  height: 100%;
+  background-color: var(--color-blue-primary);
+  border-radius: 999px;
+}
+
+.ws-card-progress-status {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.ws-card-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid #f1f5f9;
+  padding-top: 18px;
+}
+
+.ws-card-stat-col {
+  text-align: center;
+}
+
+.ws-card-stat-value {
+  font-family: var(--font-jakarta);
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 2px;
+}
+
+.ws-card-stat-title {
+  font-size: 11.5px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+/* --------------------------------------------------------------------------
+   Recommended Opportunities List
+   -------------------------------------------------------------------------- */
+.ws-opps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ws-opp-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid #f1f5f9;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ws-opp-item:hover {
+  border-color: #cbd5e1;
+  background-color: #fafcff;
+}
+
+.ws-opp-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.ws-opp-logo--pi {
+  background-color: #0f172a;
+  color: #ffffff;
+}
+
+.ws-opp-logo--orbi {
+  background-color: #e2e8f0;
+  color: #475569;
+}
+
+.ws-opp-info {
+  flex: 1;
+}
+
+.ws-opp-title {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 2px;
+}
+
+.ws-opp-sub {
+  font-size: 12.5px;
+  color: #64748b;
+}
+
+.ws-opp-arrow {
+  color: var(--color-blue-primary);
+}
+
+/* --------------------------------------------------------------------------
+   Launch Guide & Collaborations
+   -------------------------------------------------------------------------- */
+.ws-guide-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.ws-guide-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  border: 1px solid #f1f5f9;
+  background-color: #ffffff;
+}
+
+.ws-guide-check {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #22c55e;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ws-guide-info {
+  flex: 1;
+}
+
+.ws-guide-title {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 2px;
+}
+
+.ws-guide-sub {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.ws-pill-complete {
+  display: inline-flex;
+  align-items: center;
+  background-color: #dcfce7;
+  color: #15803d;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-right: 8px;
+}
+
+.ws-guide-arrow {
+  color: #94a3b8;
+}
+
+/* Collaborations Table */
+.ws-collabs-table-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr 1fr 1fr;
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #94a3b8;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.ws-collabs-empty {
+  padding: 64px 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+/* --------------------------------------------------------------------------
+   Floating AI Search Pill
+   -------------------------------------------------------------------------- */
+.ws-ai-pill-container {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  width: 100%;
+  max-width: 440px;
+  padding: 0 16px;
+  pointer-events: none;
+}
+
+.ws-ai-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.12);
+  border-radius: 999px;
+  padding: 8px 14px 8px 16px;
+  pointer-events: auto;
+  transition: all 0.2s ease;
+}
+
+.ws-ai-pill:focus-within {
+  box-shadow: 0 12px 36px -4px rgba(37, 99, 235, 0.18);
+  border-color: var(--color-blue-primary);
+  background: #ffffff;
+}
+
+.ws-ai-icon {
+  color: #64748b;
+  flex-shrink: 0;
+}
+
+.ws-ai-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: var(--font-inter);
+  font-size: 14px;
+  color: #0f172a;
+  outline: none;
+}
+
+.ws-ai-input::placeholder {
+  color: #64748b;
+}
+
+.ws-ai-mic-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: #f1f5f9;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ws-ai-mic-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+/* Toast */
+.ws-toast {
+  position: fixed;
+  bottom: 84px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #0f172a;
+  color: #ffffff;
+  font-size: 13.5px;
+  font-weight: 500;
+  padding: 10px 18px;
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+  z-index: 100;
+}
+
+.ws-toast.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Breakpoints
+   -------------------------------------------------------------------------- */
+@media (max-width: 1180px) {
+  .ws-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ws-two-cols {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .ws-sidebar {
+    display: none;
+  }
+
+  .ws-topbar {
+    padding: 0 16px;
+  }
+
+  .ws-content {
+    padding: 20px 16px;
+  }
+
+  .ws-metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .ws-panel-header {
+    flex-direction: column;
+  }
+
+  .ws-panel-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .ws-btn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .ws-card-mockup {
+    border-radius: 20px;
+  }
+}

@@ -56,8 +56,9 @@ html, body {
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
-  padding: 36px 48px 48px;
+  padding: 36px clamp(24px, 4vw, 48px) 48px;
   overflow-y: auto;
+  transition: max-width 0.3s ease;
 }
 
 .auth-left-inner {
@@ -67,6 +68,11 @@ html, body {
   display: flex;
   flex-direction: column;
   flex: 1;
+  transition: max-width 0.3s ease;
+}
+
+.auth-left-inner.is-wide {
+  max-width: 580px;
 }
 
 /* Header Row */
@@ -75,7 +81,7 @@ html, body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: clamp(48px, 10vh, 108px);
+  margin-bottom: clamp(36px, 8vh, 88px);
 }
 
 .auth-logo-link {
@@ -144,7 +150,7 @@ html, body {
 /* Title & Subtitle */
 .auth-title {
   font-family: var(--font-jakarta);
-  font-size: clamp(28px, 3.2vw, 34px);
+  font-size: clamp(28px, 3.2vw, 32px);
   font-weight: 700;
   color: #0f172a;
   letter-spacing: -0.025em;
@@ -304,6 +310,742 @@ html, body {
 
 .auth-oauth-btn:active {
   transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   Creator Step 2 Profile Form
+   -------------------------------------------------------------------------- */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.auth-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.auth-input-group {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background-color: #ffffff;
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+
+.auth-input-group:focus-within {
+  border-color: var(--color-blue-primary);
+  box-shadow: 0 0 0 3px rgba(35, 101, 242, 0.12);
+}
+
+.auth-input-prefix, .auth-input-suffix {
+  padding: 0 12px;
+  font-size: 13.5px;
+  color: #64748b;
+  background-color: #f8fafc;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid #e2e8f0;
+}
+
+.auth-input-suffix {
+  border-right: none;
+  border-left: 1px solid #e2e8f0;
+}
+
+.auth-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font-family: var(--font-inter);
+  font-size: 14px;
+  color: #111827;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.auth-input:focus {
+  border-color: var(--color-blue-primary);
+  box-shadow: 0 0 0 3px rgba(35, 101, 242, 0.12);
+}
+
+.auth-input--prefixed {
+  border: none;
+  border-radius: 0;
+}
+
+.auth-input--prefixed:focus {
+  box-shadow: none;
+}
+
+.auth-field-hint {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.auth-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 48px;
+  background-color: var(--color-blue-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-family: var(--font-inter);
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 10px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(35, 101, 242, 0.25);
+}
+
+.auth-submit-btn:hover {
+  background-color: var(--color-blue-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(35, 101, 242, 0.3);
+}
+
+.auth-submit-btn--success {
+  background-color: #10b981;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
+}
+
+.auth-submit-btn--success:hover {
+  background-color: #059669;
+}
+
+.auth-secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 44px;
+  background-color: #f1f5f9;
+  color: #475569;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.auth-secondary-btn:hover {
+  background-color: #e2e8f0;
+  color: #0f172a;
+}
+
+.auth-cta-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+/* --------------------------------------------------------------------------
+   Creator Step 3 Sync Box
+   -------------------------------------------------------------------------- */
+.auth-sync-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 12px;
+}
+
+.auth-sync-bar-track {
+  width: 100%;
+  height: 8px;
+  background-color: #e2e8f0;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.auth-sync-bar-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #2563eb, #38bdf8);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.auth-sync-percentage {
+  text-align: right;
+  font-size: 12px;
+  font-weight: 700;
+  color: #2563eb;
+  margin-bottom: 18px;
+}
+
+.auth-sync-steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.auth-sync-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  color: #64748b;
+  transition: color 0.2s ease;
+}
+
+.auth-sync-step.is-done {
+  color: #0f172a;
+  font-weight: 500;
+}
+
+.auth-sync-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: #e2e8f0;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.auth-sync-step.is-done .auth-sync-icon {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
+
+/* Creator Complete Card */
+.auth-complete-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #fafcff;
+  border: 1px solid #bfdbfe;
+  border-radius: 16px;
+  padding: 18px;
+  margin-top: 16px;
+}
+
+.auth-complete-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #2563eb;
+  flex-shrink: 0;
+}
+
+.auth-complete-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.auth-complete-name {
+  font-family: var(--font-jakarta);
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.auth-complete-topics {
+  font-size: 13px;
+  color: #4b5563;
+  margin-bottom: 2px;
+}
+
+.auth-complete-stats {
+  font-size: 12.5px;
+  color: #2563eb;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   BRAND ONBOARDING STYLES (Matching recon/onboarding-brand.png)
+   -------------------------------------------------------------------------- */
+.brand-step-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.brand-step-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.brand-step-bars {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  max-width: 140px;
+}
+
+.brand-step-bar {
+  height: 5px;
+  flex: 1;
+  border-radius: 999px;
+  background-color: #e2e8f0;
+}
+
+.brand-step-bar.is-active {
+  background-color: #2563eb;
+}
+
+.brand-id-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.brand-id-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #0A66C2;
+  color: #ffffff;
+  font-family: var(--font-jakarta);
+  font-weight: 800;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(10, 102, 194, 0.2);
+  flex-shrink: 0;
+}
+
+.brand-id-title {
+  font-family: var(--font-jakarta);
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.brand-id-name {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #4b5563;
+}
+
+.brand-id-sub {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 24px;
+  line-height: 1.45;
+}
+
+/* Sections */
+.brand-section {
+  margin-bottom: 22px;
+}
+
+.brand-section-eyebrow {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #64748b;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.brand-section-desc {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 10px;
+}
+
+.brand-textarea {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-family: var(--font-inter);
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #1f2937;
+  background: #ffffff;
+  resize: vertical;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.brand-textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+/* 3 ICP Cards */
+.brand-icp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.brand-icp-card {
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  padding: 14px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.brand-icp-card:hover {
+  border-color: #2563eb;
+  background: #fafcff;
+}
+
+.brand-icp-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.brand-icp-title {
+  font-family: var(--font-jakarta);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+
+.brand-icp-text {
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+/* Starter Creator Brief Box */
+.brand-brief-box {
+  border: 1px solid #dbeafe;
+  border-radius: 18px;
+  background: #f8faff;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.brand-brief-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.brand-brief-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-brief-logo {
+  height: 22px;
+  width: auto;
+}
+
+.brand-brief-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #2563eb;
+  text-transform: uppercase;
+}
+
+.brand-brief-headline {
+  font-family: var(--font-jakarta);
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.brand-brief-badge {
+  display: inline-flex;
+  align-items: center;
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.brand-brief-inner-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+.brand-brief-brand-name {
+  font-family: var(--font-jakarta);
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 14px;
+}
+
+.brand-brief-field {
+  margin-bottom: 14px;
+}
+
+.brand-brief-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #64748b;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.brand-brief-val {
+  font-size: 13px;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.brand-brief-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #eff6ff;
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+
+.brand-brief-sparkle {
+  color: #2563eb;
+  font-size: 14px;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.brand-brief-callout-text {
+  font-size: 12.5px;
+  color: #1e40af;
+  line-height: 1.45;
+}
+
+.brand-brief-footnote {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* Brand Action Row */
+.brand-action-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.auth-btn-secondary {
+  height: 44px;
+  padding: 0 22px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.auth-btn-secondary:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.auth-btn-primary {
+  height: 44px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-btn-primary:hover {
+  background: #1d4ed8;
+}
+
+/* --------------------------------------------------------------------------
+   Brand Matched Creators List (Step 3)
+   -------------------------------------------------------------------------- */
+.brand-matched-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.brand-match-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+  transition: border-color 0.2s ease;
+}
+
+.brand-match-card:hover {
+  border-color: #2563eb;
+}
+
+.brand-match-avatar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.brand-match-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e2e8f0;
+}
+
+.brand-match-score {
+  font-size: 11px;
+  font-weight: 700;
+  color: #16a34a;
+  background: #dcfce7;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.brand-match-info {
+  flex: 1;
+}
+
+.brand-match-name {
+  font-family: var(--font-jakarta);
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 2px;
+}
+
+.brand-match-headline {
+  font-size: 12.5px;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.brand-match-stats {
+  font-size: 12px;
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.brand-match-invite-btn {
+  padding: 8px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #374151;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.brand-match-invite-btn:hover {
+  border-color: #2563eb;
+  color: #2563eb;
+  background: #fafcff;
+}
+
+.brand-match-invite-btn.is-sent {
+  background: #dcfce7;
+  border-color: #86efac;
+  color: #16a34a;
+  font-weight: 600;
+}
+
+/* Floating AI Pill */
+.brand-floating-pill {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  border-radius: 999px;
+  padding: 7px 12px 7px 16px;
+  font-size: 13px;
+  color: #475569;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.brand-pill-mic {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
 }
 
 /* --------------------------------------------------------------------------
@@ -479,12 +1221,13 @@ html, body {
   justify-content: center;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
   z-index: 2;
+  overflow: hidden;
 }
 
-.creator-card-avatar {
-  font-size: 26px;
-  font-weight: 700;
-  color: #475569;
+.creator-card-avatar-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .creator-card-body {
@@ -580,16 +1323,20 @@ html, body {
   }
 
   .auth-left-inner {
-    max-width: 440px;
+    max-width: 100%;
     margin: 0 auto;
   }
 
   .auth-header-row {
-    margin-bottom: 36px;
+    margin-bottom: 32px;
   }
 
   .auth-right {
-    display: none; /* Split panel gracefully hides on mobile for a focused form flow */
+    display: none; /* Split panel gracefully hides on mobile for a focused flow */
+  }
+
+  .brand-icp-grid {
+    grid-template-columns: 1fr;
   }
 
   .auth-title {
@@ -610,6 +1357,10 @@ html, body {
     font-size: 26px;
   }
 
+  .brand-id-title {
+    font-size: 20px;
+  }
+
   .auth-role-title {
     font-size: 16px;
   }
@@ -621,5 +1372,13 @@ html, body {
   .auth-oauth-btn {
     height: 46px;
     font-size: 14px;
+  }
+
+  .brand-action-row {
+    flex-direction: column-reverse;
+  }
+
+  .auth-btn-secondary, .auth-btn-primary {
+    width: 100%;
   }
 }
