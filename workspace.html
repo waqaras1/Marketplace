@@ -127,7 +127,7 @@
             <!-- Language Switcher Pill -->
             <div class="ws-pill ws-lang-pill">
               <button type="button" class="ws-lang-opt is-active" id="ws-lang-en">EN</button>
-              <button type="button" class="ws-lang-opt" id="ws-lang-fr">FR</button>
+              <button type="button" class="ws-lang-opt" id="ws-lang-es">ES</button>
             </div>
 
             <!-- Notification Bell -->
@@ -437,40 +437,6 @@
     <!-- Toast Notification Container -->
     <div id="ws-toast" class="ws-toast" aria-live="polite"></div>
 
-    <script>
-      // Toast notification helper
-      function showToast(msg) {
-        const toast = document.getElementById('ws-toast');
-        if (!toast) return;
-        toast.textContent = msg;
-        toast.classList.add('is-visible');
-        setTimeout(() => toast.classList.remove('is-visible'), 2800);
-      }
-
-      document.getElementById('btn-copy-link')?.addEventListener('click', () => {
-        navigator.clipboard.writeText(window.location.origin + '/workspace');
-        showToast('Card link copied to clipboard!');
-      });
-
-      document.getElementById('btn-share-card')?.addEventListener('click', () => {
-        showToast('Share modal ready: https://naano.com/c/waqar-ahmed');
-      });
-
-      document.getElementById('btn-open-card')?.addEventListener('click', () => {
-        showToast('Viewing full creator public storefront');
-      });
-
-      // Language toggle
-      const enBtn = document.getElementById('ws-lang-en');
-      const frBtn = document.getElementById('ws-lang-fr');
-      enBtn?.addEventListener('click', () => {
-        enBtn.classList.add('is-active');
-        frBtn.classList.remove('is-active');
-      });
-      frBtn?.addEventListener('click', () => {
-        frBtn.classList.add('is-active');
-        enBtn.classList.remove('is-active');
-      });
-    </script>
+    <script type="module" src="/src/workspace.js"></script>
   </body>
 </html>

@@ -593,7 +593,7 @@ body {
 
 .lang-text-container {
   display: inline-block;
-  min-width: 18px;
+  min-width: 22px;
   height: 18px;
   overflow: hidden;
   position: relative;

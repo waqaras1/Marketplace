@@ -3,6 +3,8 @@
  * Handles scroll transition, resources dropdown, language toggling, and mobile navigation drawer.
  */
 
+import { initI18n } from './i18n.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   const header = document.getElementById('naano-header');
   const resourcesGroup = document.getElementById('resources-group');
@@ -88,37 +90,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* -------------------------------------------------------------------------- */
-  /* 3. Language Selector Toggle (EN <-> FR)                                    */
+  /* 3. Language Selector Toggle (EN <-> ES via i18n module)                   */
   /* -------------------------------------------------------------------------- */
-  const switchLanguage = () => {
-    currentLang = currentLang === 'EN' ? 'FR' : 'EN';
-
-    const updateLangElement = (elem) => {
-      if (!elem) return;
-      elem.textContent = currentLang;
-      elem.classList.remove('animate-change');
-      void elem.offsetWidth; // Trigger reflow for animation restart
-      elem.classList.add('animate-change');
-    };
-
-    updateLangElement(activeLangCode);
-    updateLangElement(mobileLangCode);
-
-    if (langToggleBtn) {
-      langToggleBtn.setAttribute(
-        'aria-label',
-        `Switch language, current ${currentLang === 'EN' ? 'English' : 'French'}`
-      );
-    }
-  };
-
-  if (langToggleBtn) {
-    langToggleBtn.addEventListener('click', switchLanguage);
-  }
-
-  if (mobileLangToggle) {
-    mobileLangToggle.addEventListener('click', switchLanguage);
-  }
+  initI18n();
 
   /* -------------------------------------------------------------------------- */
   /* 4. Mobile Navigation Drawer Toggle                                        */

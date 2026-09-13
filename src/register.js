@@ -3,6 +3,8 @@
  * Complete end-to-end frontend flows for Creators and Brands.
  */
 
+import { initI18n, applyCurrentLanguage } from './i18n.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   // Elements: Main containers
   const leftInner = document.getElementById('auth-left-inner');
@@ -80,6 +82,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (url) {
       history.pushState({ view: targetKey }, '', url);
     }
+
+    // Apply translations to visible view
+    applyCurrentLanguage();
   }
 
   // Role Selection Clicks
@@ -207,17 +212,8 @@ document.addEventListener('DOMContentLoaded', () => {
     showView('brandOnboarding', 'brand', true, '/register?role=saas&step=onboarding');
   });
 
-  // Language Switcher
-  const langBtn = document.getElementById('auth-lang-btn');
-  const activeLang = document.getElementById('active-lang');
-  if (langBtn && activeLang) {
-    const langs = ['EN', 'FR', 'DE', 'ES'];
-    let idx = 0;
-    langBtn.addEventListener('click', () => {
-      idx = (idx + 1) % langs.length;
-      activeLang.textContent = langs[idx];
-    });
-  }
+  // Language Switcher (EN <-> ES with persistence)
+  initI18n();
 
   // URL Query State check
   function checkUrlState() {
