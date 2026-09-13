@@ -902,7 +902,62 @@ body {
 
 @media (max-width: 768px) {
   .ws-sidebar {
+    position: fixed;
+    bottom: 0;
+    top: auto;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 56px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 4px;
+    border-right: none;
+    border-top: 1px solid var(--color-border-subtle);
+    background: #ffffff;
+    z-index: 90;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.04);
+  }
+
+  .ws-sidebar-brand {
     display: none;
+  }
+
+  .ws-sidebar-nav {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    overflow-x: auto;
+    padding: 0 4px;
+    gap: 2px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ws-sidebar-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ws-nav-item {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border-radius: 8px;
+  }
+
+  .ws-nav-item svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .ws-main-wrapper {
+    padding-bottom: 120px;
+  }
+
+  .ws-ai-pill-container {
+    bottom: 64px;
   }
 
   .ws-topbar {

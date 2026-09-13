@@ -1028,7 +1028,7 @@ function renderReferralsView(isBrand, isEs) {
             <span>${isEs ? 'Copiar mi enlace de referido' : 'Copy my referral link'}</span>
           </button>
 
-          <a href="#" class="ws-referral-link-more" id="ref-how-it-works-link">
+          <a href="javascript:void(0)" class="ws-referral-link-more" id="ref-how-it-works-link">
             <span>${isEs ? 'Ver cómo funciona' : 'See how it works'}</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>

@@ -87,6 +87,21 @@ document.addEventListener('DOMContentLoaded', () => {
       const balanceText = document.querySelector('.ws-balance-pill span');
       if (balanceText) balanceText.textContent = '€0';
     }
+
+    // Sync Language Switcher Pill Active States
+    const enBtn = document.getElementById('ws-lang-en');
+    const esBtn = document.getElementById('ws-lang-es');
+    if (isEs) {
+      esBtn?.classList.add('is-active');
+      enBtn?.classList.remove('is-active');
+      if (modeCreator) modeCreator.textContent = 'Creador';
+      if (modeBrand) modeBrand.textContent = 'Marca';
+    } else {
+      enBtn?.classList.add('is-active');
+      esBtn?.classList.remove('is-active');
+      if (modeCreator) modeCreator.textContent = 'Creator';
+      if (modeBrand) modeBrand.textContent = 'Brand';
+    }
   }
 
   // Switch Active View
