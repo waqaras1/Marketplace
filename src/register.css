@@ -213,12 +213,13 @@ html, body {
   line-height: 1.48;
 }
 
-/* Sign-in Note */
-.auth-signin-note {
+/* Sign-in Note & Signup Note */
+.auth-signin-note,
+.login-signup-note {
   text-align: center;
   font-size: 13.5px;
   color: var(--color-text-muted);
-  margin-top: 36px;
+  margin-top: 24px;
 }
 
 .auth-signin-link {
@@ -232,6 +233,53 @@ html, body {
 .auth-signin-link:hover {
   color: var(--color-blue-hover);
   text-decoration: underline;
+}
+
+/* Login Tabs & Sub-components */
+.login-tabs-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+  width: 100%;
+}
+
+.login-tab {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #64748b;
+  font-family: var(--font-jakarta);
+  font-weight: 600;
+  font-size: 13.5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.login-tab:hover {
+  border-color: #cbd5e1;
+  color: #0f172a;
+  background: #f1f5f9;
+}
+
+.login-tab.is-active {
+  border-color: #0f62fe;
+  background: #eff6ff;
+  color: #0f62fe;
+}
+
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 14px 0;
+  color: #94a3b8;
+  font-size: 13px;
 }
 
 /* Back Link */
@@ -1374,6 +1422,11 @@ html, body {
     font-size: 14px;
   }
 
+  .login-tab {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+
   .brand-action-row {
     flex-direction: column-reverse;
   }
@@ -1382,3 +1435,101 @@ html, body {
     width: 100%;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Desktop Viewport & Login Vertical Sizing Refinements
+   -------------------------------------------------------------------------- */
+@media (min-width: 1025px) {
+  .auth-page {
+    height: 100vh;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  .auth-left {
+    height: 100vh;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+  }
+
+  .auth-right {
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  /* Specific sizing for Login page so content fits comfortably within normal desktop screen */
+  .auth-page--login .auth-left {
+    padding: clamp(20px, 3.2vh, 36px) clamp(24px, 4vw, 48px) clamp(16px, 2.5vh, 28px);
+    justify-content: flex-start;
+  }
+
+  .auth-page--login .auth-header-row {
+    margin-bottom: clamp(16px, 2.5vh, 28px);
+  }
+
+  .auth-page--login .login-tabs-row {
+    margin-bottom: 16px;
+  }
+
+  .auth-page--login .auth-title {
+    font-size: clamp(24px, 2.4vw, 28px);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+
+  .auth-page--login .auth-subtitle {
+    font-size: 14px;
+    margin-bottom: 16px;
+    line-height: 1.45;
+  }
+
+  .auth-page--login .auth-oauth-group {
+    gap: 8px;
+  }
+
+  .auth-page--login .auth-oauth-btn {
+    height: 42px;
+    font-size: 13.5px;
+    padding: 0 16px;
+  }
+
+  .auth-page--login .login-divider {
+    margin: 12px 0;
+    font-size: 12.5px;
+  }
+
+  .auth-page--login .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .auth-page--login .auth-field {
+    margin-bottom: 0;
+  }
+
+  .auth-page--login .auth-label {
+    margin-bottom: 4px;
+    font-size: 12.5px;
+  }
+
+  .auth-page--login .auth-input {
+    height: 42px;
+    padding: 10px 14px;
+    font-size: 13.5px;
+  }
+
+  .auth-page--login .auth-submit-btn {
+    height: 42px;
+    padding: 0 18px;
+    font-size: 13.5px;
+    margin-top: 4px;
+  }
+
+  .auth-page--login .login-signup-note {
+    margin-top: 14px;
+    margin-bottom: 0;
+    font-size: 13px;
+  }
+}
+

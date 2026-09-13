@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="/src/register.css" />
   </head>
   <body>
-    <div class="auth-page">
+    <div class="auth-page auth-page--login">
       <!-- Left: Sign in Form Container -->
       <main class="auth-left">
         <div class="auth-left-inner">
@@ -56,12 +56,11 @@
           </div>
 
           <!-- Account Type Switcher Tabs -->
-          <div class="login-tabs-row" style="display: flex; gap: 8px; margin-bottom: 24px;">
+          <div class="login-tabs-row">
             <button
               type="button"
               class="login-tab is-active"
               id="tab-login-creator"
-              style="flex: 1; padding: 10px 14px; border-radius: 10px; border: 1px solid #0f62fe; background: #eff6ff; color: #0f62fe; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.15s;"
             >
               I'm a Creator
             </button>
@@ -69,7 +68,6 @@
               type="button"
               class="login-tab"
               id="tab-login-brand"
-              style="flex: 1; padding: 10px 14px; border-radius: 10px; border: 1px solid #e2e8f0; background: #f8fafc; color: #64748b; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.15s;"
             >
               I'm a Brand
             </button>
@@ -109,7 +107,7 @@
               </a>
             </div>
 
-            <div style="display: flex; align-items: center; gap: 12px; margin: 18px 0; color: #94a3b8; font-size: 13px;">
+            <div class="login-divider">
               <div style="flex: 1; height: 1px; background: #e2e8f0;"></div>
               <span>or sign in with email</span>
               <div style="flex: 1; height: 1px; background: #e2e8f0;"></div>
@@ -125,7 +123,7 @@
                 <input type="password" id="creator-pass" class="auth-input" value="••••••••••••" required />
               </div>
 
-              <button type="submit" class="auth-submit-btn" style="margin-top: 8px;">
+              <button type="submit" class="auth-submit-btn">
                 <span>Sign in as Waqar Ahmed (Creator)</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M5 12h14" />
@@ -136,7 +134,7 @@
           </div>
 
           <!-- View: Brand Sign In -->
-          <div id="login-view-brand" class="auth-view" style="display: none;">
+          <div id="login-view-brand" class="auth-view">
             <h1 class="auth-title">Welcome back, Brand</h1>
             <p class="auth-subtitle">Sign in to manage creator briefs, active campaigns, and pipeline analytics.</p>
 
@@ -169,7 +167,7 @@
               </a>
             </div>
 
-            <div style="display: flex; align-items: center; gap: 12px; margin: 18px 0; color: #94a3b8; font-size: 13px;">
+            <div class="login-divider">
               <div style="flex: 1; height: 1px; background: #e2e8f0;"></div>
               <span>or sign in with email</span>
               <div style="flex: 1; height: 1px; background: #e2e8f0;"></div>
@@ -185,7 +183,7 @@
                 <input type="password" id="brand-pass" class="auth-input" value="••••••••••••" required />
               </div>
 
-              <button type="submit" class="auth-submit-btn" style="margin-top: 8px;">
+              <button type="submit" class="auth-submit-btn">
                 <span>Sign in as Atlas Marketing (Brand)</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M5 12h14" />
@@ -195,15 +193,15 @@
             </form>
           </div>
 
-          <p class="auth-signin-note" style="margin-top: 24px;">
+          <p class="login-signup-note" id="login-signup-note">
             Don't have an account yet?
-            <a href="/register" class="auth-signin-link">Sign up</a>
+            <a href="/register" class="auth-signin-link" id="login-signup-link">Sign up</a>
           </p>
         </div>
       </main>
 
       <!-- Right: Split Visual Side Panel -->
-      <aside class="auth-right">
+      <aside class="auth-right is-creator-theme" id="auth-right">
         <!-- Creator Visual Panel (matching recon/login-creator.png) -->
         <div class="auth-right-content is-active" id="right-login-creator">
           <div class="auth-preview-header">
@@ -249,15 +247,15 @@
         </div>
 
         <!-- Brand Visual Panel (matching recon/login-brand.png) -->
-        <div class="auth-right-content" id="right-login-brand" style="display: none; background: #0f62fe;">
-          <div class="auth-statement-card" style="background: transparent; color: #fff; padding: 48px;">
-            <h2 class="auth-statement-title" style="color: #fff; font-size: 34px; margin-bottom: 16px;">
+        <div class="auth-right-content" id="right-login-brand">
+          <div class="auth-statement-card">
+            <h2 class="auth-statement-title">
               Creators. Brands. Results.
             </h2>
-            <p class="auth-statement-copy" style="color: rgba(255, 255, 255, 0.9); font-size: 17px; line-height: 1.6; margin-bottom: 32px;">
+            <p class="auth-statement-copy">
               Run LinkedIn creator campaigns that drive real business - discover creators, track performance, pay in one click.
             </p>
-            <div style="color: rgba(255, 255, 255, 0.7); font-size: 14px; font-weight: 500;">
+            <div class="auth-statement-footer" style="color: rgba(255, 255, 255, 0.7); font-size: 14px; font-weight: 500; margin-top: 24px;">
               Built for B2B marketing teams
             </div>
           </div>

@@ -14,34 +14,32 @@ document.addEventListener('DOMContentLoaded', () => {
   const viewBrand = document.getElementById('login-view-brand');
   const rightCreator = document.getElementById('right-login-creator');
   const rightBrand = document.getElementById('right-login-brand');
+  const authRight = document.getElementById('auth-right');
 
   function switchRole(role) {
-    if (role === 'brand' || role === 'saas') {
-      tabBrand.style.borderColor = '#0f62fe';
-      tabBrand.style.background = '#eff6ff';
-      tabBrand.style.color = '#0f62fe';
-      tabCreator.style.borderColor = '#e2e8f0';
-      tabCreator.style.background = '#f8fafc';
-      tabCreator.style.color = '#64748b';
+    const isBrand = role === 'brand' || role === 'saas';
+    if (isBrand) {
+      tabBrand?.classList.add('is-active');
+      tabCreator?.classList.remove('is-active');
 
-      viewCreator.style.display = 'none';
-      viewBrand.style.display = 'block';
+      viewCreator?.classList.remove('is-active');
+      viewBrand?.classList.add('is-active');
 
-      rightCreator.style.display = 'none';
-      rightBrand.style.display = 'block';
+      rightCreator?.classList.remove('is-active');
+      rightBrand?.classList.add('is-active');
+
+      authRight?.classList.remove('is-creator-theme');
     } else {
-      tabCreator.style.borderColor = '#0f62fe';
-      tabCreator.style.background = '#eff6ff';
-      tabCreator.style.color = '#0f62fe';
-      tabBrand.style.borderColor = '#e2e8f0';
-      tabBrand.style.background = '#f8fafc';
-      tabBrand.style.color = '#64748b';
+      tabCreator?.classList.add('is-active');
+      tabBrand?.classList.remove('is-active');
 
-      viewCreator.style.display = 'block';
-      viewBrand.style.display = 'none';
+      viewCreator?.classList.add('is-active');
+      viewBrand?.classList.remove('is-active');
 
-      rightCreator.style.display = 'block';
-      rightBrand.style.display = 'none';
+      rightCreator?.classList.add('is-active');
+      rightBrand?.classList.remove('is-active');
+
+      authRight?.classList.add('is-creator-theme');
     }
   }
 

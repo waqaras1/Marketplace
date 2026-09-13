@@ -222,6 +222,7 @@ export const translations = {
     'login.brand_sub': 'Sign in to manage creator briefs, active campaigns, and pipeline analytics.',
     'login.btn_linkedin': 'Continue with LinkedIn',
     'login.btn_google': 'Continue with Google',
+    'login.signup_note': 'Don\'t have an account yet? <a href="/register" class="auth-signin-link" id="login-signup-link">Sign up</a>',
 
     // Workspace
     'ws.back': 'Back to onboarding',
@@ -484,6 +485,7 @@ export const translations = {
     'login.brand_sub': 'Inicia sesión para gestionar tus briefs, campañas activas y analítica de pipeline.',
     'login.btn_linkedin': 'Continuar con LinkedIn',
     'login.btn_google': 'Continuar con Google',
+    'login.signup_note': '¿Aún no tienes cuenta? <a href="/register" class="auth-signin-link" id="login-signup-link">Regístrate</a>',
 
     // Workspace
     'ws.back': 'Volver al onboarding',
@@ -666,7 +668,7 @@ const selectorRules = [
   { sel: '#role-card-creator .auth-role-desc', key: 'reg.opt_creator_desc' },
   { sel: '#role-card-brand .auth-role-title', key: 'reg.opt_brand_title' },
   { sel: '#role-card-brand .auth-role-desc', key: 'reg.opt_brand_desc' },
-  { sel: '.auth-signin-note', key: 'reg.already_account', html: true },
+  { sel: '#view-role-select .auth-signin-note, #view-creator-auth .auth-signin-note, #view-brand-auth .auth-signin-note', key: 'reg.already_account', html: true },
   { sel: '#right-state-default .auth-statement-title', key: 'reg.stmt_title' },
   { sel: '#right-state-default .auth-statement-copy', key: 'reg.stmt_copy' },
 
@@ -724,6 +726,7 @@ const selectorRules = [
   { sel: '#login-view-brand .auth-subtitle', key: 'login.brand_sub' },
   { sel: '#btn-login-brand-google span', key: 'login.btn_google' },
   { sel: '#btn-login-brand-linkedin span', key: 'login.btn_linkedin' },
+  { sel: '#login-signup-note', key: 'login.signup_note', html: true },
 
   // Register right side states
   { sel: '#right-state-creator .auth-preview-eyebrow', key: 'reg.card_preview_eyebrow' },
