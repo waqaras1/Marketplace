@@ -9,6 +9,7 @@ export default defineConfig({
         register: resolve(import.meta.dirname, 'register.html'),
         login: resolve(import.meta.dirname, 'login.html'),
         workspace: resolve(import.meta.dirname, 'workspace.html'),
+        notFound: resolve(import.meta.dirname, '404.html'),
       },
     },
   },
