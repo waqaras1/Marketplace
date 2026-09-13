@@ -218,5 +218,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initQuoteScrollAnimation();
 
+  /* -------------------------------------------------------------------------- */
+  /* 6. BlogSEO Testimonial Video Playback Controller                            */
+  /* -------------------------------------------------------------------------- */
+  const initTestimonialVideo = () => {
+    const videoContainer = document.querySelector('.lp-proof-video');
+    if (!videoContainer) return;
+
+    const video = videoContainer.querySelector('.lp-proof-video__media');
+    const playBtn = videoContainer.querySelector('.lp-proof-video__play-btn');
+    if (!video || !playBtn) return;
+
+    const togglePlay = () => {
+      if (video.paused || video.ended) {
+        video.play().then(() => {
+          videoContainer.classList.add('is-playing');
+          video.setAttribute('controls', 'true');
+        }).catch(() => {
+          // Fallback if autoplay policy restricts
+          videoContainer.classList.add('is-playing');
+          video.setAttribute('controls', 'true');
+        });
+      } else {
+        video.pause();
+        videoContainer.classList.remove('is-playing');
+      }
+    };
+
+    playBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      togglePlay();
+    });
+
+    video.addEventListener('pause', () => {
+      videoContainer.classList.remove('is-playing');
+    });
+
+    video.addEventListener('ended', () => {
+      videoContainer.classList.remove('is-playing');
+      video.removeAttribute('controls');
+      video.load();
+    });
+  };
+
+  initTestimonialVideo();
+
 
 });
