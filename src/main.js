@@ -263,5 +263,70 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initTestimonialVideo();
 
+  /* -------------------------------------------------------------------------- */
+  /* 7. Results Section Stat Counters Count-Up Animation                        */
+  /* -------------------------------------------------------------------------- */
+  const initResultsCounterAnimation = () => {
+    const statsContainer = document.querySelector('[data-results-stats]');
+    if (!statsContainer) return;
 
+    const counterElements = statsContainer.querySelectorAll('[data-cu]');
+    if (!counterElements.length) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (prefersReducedMotion.matches) return;
+
+    let hasAnimated = false;
+    const animateCounters = () => {
+      if (hasAnimated) return;
+      hasAnimated = true;
+
+      counterElements.forEach((el) => {
+        const target = parseFloat(el.getAttribute('data-target')) || 0;
+        const suffix = el.getAttribute('data-suffix') || '';
+        const isComma = el.getAttribute('data-format') === 'comma';
+        const duration = 1400;
+        const startTime = performance.now();
+
+        const step = (currentTime) => {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          // Ease-out cubic curve
+          const easeOut = 1 - Math.pow(1 - progress, 3);
+          const currentVal = Math.round(target * easeOut);
+
+          const formatted = isComma ? currentVal.toLocaleString('en-US') : currentVal;
+          el.textContent = `${formatted}${suffix}`;
+
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            const finalVal = isComma ? target.toLocaleString('en-US') : target;
+            el.textContent = `${finalVal}${suffix}`;
+          }
+        };
+
+        requestAnimationFrame(step);
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateCounters();
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(statsContainer);
+  };
+
+  initResultsCounterAnimation();
 });
+
+
+
