@@ -85,11 +85,27 @@ async function run() {
   const faqOpenAfter = await evaluate('document.querySelectorAll(".lp-faq-item.is-open").length');
   console.log('FAQ accordion toggling:', { before: faqOpenBefore, after: faqOpenAfter });
 
-  // Check Booking modal
+  // Check Booking modal from main button
   await evaluate('document.getElementById("btn-open-booking-modal")?.click()');
   await new Promise(r => setTimeout(r, 300));
-  const modalActive = await evaluate('document.getElementById("booking-modal-overlay")?.classList.contains("is-active")');
-  console.log('Booking modal opens on button click:', modalActive);
+  const modalActive1 = await evaluate('document.getElementById("booking-modal-overlay")?.classList.contains("is-active")');
+  console.log('Booking modal opens on main button click:', modalActive1);
+  await evaluate('document.getElementById("btn-close-booking-modal")?.click()');
+  await new Promise(r => setTimeout(r, 200));
+
+  // Check Booking modal from Pricing card CTA
+  await evaluate('document.querySelector(".lp-pricing-card__btn")?.click()');
+  await new Promise(r => setTimeout(r, 300));
+  const modalActive2 = await evaluate('document.getElementById("booking-modal-overlay")?.classList.contains("is-active")');
+  console.log('Booking modal opens on pricing button click:', modalActive2);
+  await evaluate('document.getElementById("btn-close-booking-modal")?.click()');
+  await new Promise(r => setTimeout(r, 200));
+
+  // Check Booking modal from FAQ callout link
+  await evaluate('document.querySelector(".lp-faq-callout-link")?.click()');
+  await new Promise(r => setTimeout(r, 300));
+  const modalActive3 = await evaluate('document.getElementById("booking-modal-overlay")?.classList.contains("is-active")');
+  console.log('Booking modal opens on FAQ callout link click:', modalActive3);
   await evaluate('document.getElementById("btn-close-booking-modal")?.click()');
   await new Promise(r => setTimeout(r, 200));
 

@@ -380,6 +380,15 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
+    // Also bind all booking CTA links (Pricing card, FAQ callout, etc.)
+    const allBookingLinks = document.querySelectorAll('a[href="#book-a-call"]');
+    allBookingLinks.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal();
+      });
+    });
+
     if (closeBtn) {
       closeBtn.addEventListener('click', closeModal);
     }
@@ -435,11 +444,36 @@ document.addEventListener('DOMContentLoaded', () => {
   initBookingModal();
 
   /* -------------------------------------------------------------------------- */
-  /* 10. Route Fallback Handlers (/creators -> Creator Registration)           */
+  /* 10. Route Handlers (/creators, /agencies, /case-studies/blogseo)           */
   /* -------------------------------------------------------------------------- */
   if (window.location.pathname === '/creators') {
     window.location.replace('/register?role=influencer');
+  } else if (window.location.pathname === '/agencies') {
+    window.location.replace('/register?role=saas');
+  } else if (window.location.pathname === '/case-studies/blogseo') {
+    window.location.replace('/#what-people-think');
   }
+
+  // Intercept in-page clicks for agency and case-study links to navigate seamlessly
+  document.querySelectorAll('a[href="/agencies"]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = '/register?role=saas';
+    });
+  });
+
+  document.querySelectorAll('a[href="/case-studies/blogseo"]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetSec = document.getElementById('what-people-think');
+      if (targetSec) {
+        targetSec.scrollIntoView({ behavior: 'smooth' });
+        history.pushState(null, '', '#what-people-think');
+      } else {
+        window.location.href = '/#what-people-think';
+      }
+    });
+  });
 });
 
 

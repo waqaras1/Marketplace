@@ -1233,11 +1233,17 @@ function renderOpportunitiesView(isBrand, isEs) {
 function renderMessagesView(isBrand, isEs) {
   return `
     <div class="ws-view-container ws-messages-view">
+      <div class="ws-page-header" style="margin-bottom: 20px;">
+        <span class="ws-eyebrow">${isBrand ? (isEs ? 'Comunicaciones de marca' : 'Brand Communications') : (isEs ? 'Comunicaciones directas' : 'Direct Messages')}</span>
+        <h1 class="ws-title">${isEs ? 'Mensajes' : 'Messages'}</h1>
+        <p class="ws-subtitle">${isBrand ? (isEs ? 'Conversaciones directas y negociaciones con creadores de contenido.' : 'Direct conversations and negotiations with creator talent.') : (isEs ? 'Conversaciones en tiempo real con patrocinadores y marcas colaboradoras.' : 'Real-time conversations with active brand sponsors and creators.')}</p>
+      </div>
+
       <div class="ws-messages-layout">
         <!-- Left: Conversations List -->
         <div class="ws-convos-sidebar">
           <div class="ws-convos-header">
-            <h2 class="ws-convos-title">${isEs ? 'Mensajes' : 'Messages'}</h2>
+            <h2 class="ws-convos-title">${isEs ? 'Conversaciones' : 'Conversations'}</h2>
             <div class="ws-convos-search">
               <input type="text" placeholder="${isEs ? 'Buscar conversaciones...' : 'Search conversations...'}" class="ws-convos-input" />
             </div>
