@@ -326,6 +326,45 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   initResultsCounterAnimation();
+
+  /* -------------------------------------------------------------------------- */
+  /* 8. FAQ Accordion Interactive Controller                                    */
+  /* -------------------------------------------------------------------------- */
+  const initFaqAccordion = () => {
+    const faqShell = document.querySelector('.lp-faq-shell');
+    if (!faqShell) return;
+
+    const faqItems = faqShell.querySelectorAll('.lp-faq-item');
+
+    faqItems.forEach((item) => {
+      const trigger = item.querySelector('.lp-faq-trigger');
+      const content = item.querySelector('.lp-faq-content');
+      if (!trigger || !content) return;
+
+      trigger.addEventListener('click', () => {
+        const isOpen = item.classList.contains('is-open');
+
+        // Close other open items for a clean single-open accordion feel
+        faqItems.forEach((otherItem) => {
+          if (otherItem !== item && otherItem.classList.contains('is-open')) {
+            otherItem.classList.remove('is-open');
+            const otherBtn = otherItem.querySelector('.lp-faq-trigger');
+            if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        if (isOpen) {
+          item.classList.remove('is-open');
+          trigger.setAttribute('aria-expanded', 'false');
+        } else {
+          item.classList.add('is-open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  };
+
+  initFaqAccordion();
 });
 
 
