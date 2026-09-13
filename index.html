@@ -37,7 +37,7 @@
           <!-- Desktop Navigation Links -->
           <nav class="nav-links" aria-label="Primary navigation">
             <a href="/" class="nav-link">For companies</a>
-            <a href="/creators" class="nav-link">For creators</a>
+            <a href="/register?role=influencer" class="nav-link">For creators</a>
             <a href="/agencies" class="nav-link">For agencies</a>
             <a href="/#how-it-works" class="nav-link">How it works</a>
 
@@ -157,7 +157,7 @@
         <div class="mobile-nav-inner">
           <nav class="mobile-nav-links" aria-label="Mobile navigation">
             <a href="/" class="mobile-nav-item">For companies</a>
-            <a href="/creators" class="mobile-nav-item">For creators</a>
+            <a href="/register?role=influencer" class="mobile-nav-item">For creators</a>
             <a href="/agencies" class="mobile-nav-item">For agencies</a>
             <a href="/#how-it-works" class="mobile-nav-item">How it works</a>
 
@@ -434,8 +434,9 @@
         </div>
       </section>
 
-      <!-- Creator Marketplace Section -->
+      <!-- Creator Marketplace Section (How it works) -->
       <section
+        id="how-it-works"
         class="lp-marketplace"
         data-screen-label="Creator marketplace"
         aria-labelledby="lp-marketplace-title"
@@ -1303,7 +1304,7 @@
                   <div class="lp-pricing-card__feature-item">Reporting and optimisation</div>
                 </div>
 
-                <a href="/book" class="lp-pricing-card__btn">
+                <a href="#book-a-call" class="lp-pricing-card__btn">
                   <span>Book a campaign call</span>
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <line x1="4" y1="12" x2="19" y2="12"></line>
@@ -1353,7 +1354,7 @@
             </p>
             <div class="lp-faq-callout">
               <span class="lp-faq-callout-lbl">Still have questions?</span>
-              <a href="/book" class="lp-faq-callout-link">
+              <a href="#book-a-call" class="lp-faq-callout-link">
                 <span>Talk to our team</span>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <line x1="4" y1="12" x2="19" y2="12"></line>
@@ -1659,7 +1660,7 @@
                 </div>
               </div>
 
-              <a href="/book" class="lp-book-cta">
+              <a href="#book-a-call" class="lp-book-cta" id="btn-open-booking-modal">
                 <span>Book a campaign call</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <line x1="4" y1="12" x2="20" y2="12"></line>
@@ -1780,6 +1781,69 @@
         </a>
       </div>
     </footer>
+
+    <!-- Booking Strategy Call Interactive Modal -->
+    <div id="booking-modal-overlay" class="book-modal-overlay" aria-hidden="true">
+      <div class="book-modal" role="dialog" aria-modal="true" aria-labelledby="modal-book-title">
+        <button type="button" class="book-modal-close" id="btn-close-booking-modal" aria-label="Close modal">✕</button>
+
+        <div id="booking-modal-form-state">
+          <div class="book-modal-header">
+            <div class="book-modal-badge">CAMPAIGN STRATEGY CALL</div>
+            <h3 class="book-modal-title" id="modal-book-title">Schedule your 30-min strategy session</h3>
+            <p class="book-modal-sub">Leave with a clear creator campaign format, recommended creators, and estimated budget.</p>
+          </div>
+
+          <form id="booking-modal-form" class="book-modal-form">
+            <div class="book-modal-field">
+              <label class="book-modal-label">Select Date &amp; Time</label>
+              <div class="book-modal-dates">
+                <button type="button" class="book-date-opt is-selected">Tomorrow, 10:00 AM</button>
+                <button type="button" class="book-date-opt">Tomorrow, 2:30 PM</button>
+                <button type="button" class="book-date-opt">Wednesday, 11:00 AM</button>
+                <button type="button" class="book-date-opt">Thursday, 4:00 PM</button>
+              </div>
+            </div>
+
+            <div class="book-modal-field">
+              <label for="book-input-name" class="book-modal-label">Your Name</label>
+              <input type="text" id="book-input-name" class="book-modal-input" placeholder="e.g. Alex Morgan" required value="Alex Morgan" />
+            </div>
+
+            <div class="book-modal-field">
+              <label for="book-input-email" class="book-modal-label">Work Email</label>
+              <input type="email" id="book-input-email" class="book-modal-input" placeholder="alex@company.com" required value="alex@company.com" />
+            </div>
+
+            <div class="book-modal-field">
+              <label for="book-input-company" class="book-modal-label">Company or Website</label>
+              <input type="text" id="book-input-company" class="book-modal-input" placeholder="https://yourcompany.com" required value="https://company.com" />
+            </div>
+
+            <button type="submit" class="book-modal-submit" id="btn-confirm-booking">
+              <span>Confirm Strategy Session</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" y1="12" x2="20" y2="12"></line>
+                <polyline points="13 5 20 12 13 19"></polyline>
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <div id="booking-modal-success-state" class="book-modal-success" style="display: none;">
+          <div class="book-success-icon">✓</div>
+          <h3 class="book-modal-title">Strategy Call Confirmed!</h3>
+          <p class="book-modal-sub">We have sent a calendar invite and video link to your email. Our campaign strategist is preparing tailored insights for your launch.</p>
+          <div class="book-success-meta">
+            <div><strong>Time:</strong> Tomorrow at 10:00 AM (30 mins)</div>
+            <div><strong>Meeting:</strong> Google Meet (link in invite)</div>
+          </div>
+          <button type="button" class="book-modal-submit" id="btn-done-booking">
+            <span>Done</span>
+          </button>
+        </div>
+      </div>
+    </div>
 
     <script type="module" src="/src/main.js"></script>
   </body>

@@ -339,7 +339,109 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   initFaqAccordion();
+
+  /* -------------------------------------------------------------------------- */
+  /* 9. Booking Strategy Session Interactive Modal & Routing                    */
+  /* -------------------------------------------------------------------------- */
+  const initBookingModal = () => {
+    const modalOverlay = document.getElementById('booking-modal-overlay');
+    const openBtn = document.getElementById('btn-open-booking-modal');
+    const closeBtn = document.getElementById('btn-close-booking-modal');
+    const form = document.getElementById('booking-modal-form');
+    const formState = document.getElementById('booking-modal-form-state');
+    const successState = document.getElementById('booking-modal-success-state');
+    const doneBtn = document.getElementById('btn-done-booking');
+
+    if (!modalOverlay) return;
+
+    const openModal = () => {
+      modalOverlay.classList.add('is-active');
+      modalOverlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeModal = () => {
+      modalOverlay.classList.remove('is-active');
+      modalOverlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      // Reset state after close
+      setTimeout(() => {
+        if (formState && successState) {
+          formState.style.display = 'block';
+          successState.style.display = 'none';
+        }
+      }, 300);
+    };
+
+    if (openBtn) {
+      openBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal();
+      });
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeModal);
+    }
+
+    if (doneBtn) {
+      doneBtn.addEventListener('click', closeModal);
+    }
+
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalOverlay.classList.contains('is-active')) {
+        closeModal();
+      }
+    });
+
+    // Date & Time selection buttons
+    const dateBtns = modalOverlay.querySelectorAll('.book-date-opt');
+    dateBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        dateBtns.forEach((b) => b.classList.remove('is-selected'));
+        btn.classList.add('is-selected');
+      });
+    });
+
+    // Form submission
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (formState && successState) {
+          formState.style.display = 'none';
+          successState.style.display = 'block';
+        }
+      });
+    }
+
+    // Handle incoming URL /book
+    if (window.location.pathname === '/book' || window.location.hash === '#book-a-call') {
+      const bookSec = document.getElementById('book-a-call');
+      if (bookSec) {
+        bookSec.scrollIntoView({ behavior: 'smooth' });
+      }
+      if (window.location.pathname === '/book') {
+        setTimeout(openModal, 600);
+      }
+    }
+  };
+
+  initBookingModal();
+
+  /* -------------------------------------------------------------------------- */
+  /* 10. Route Fallback Handlers (/creators -> Creator Registration)           */
+  /* -------------------------------------------------------------------------- */
+  if (window.location.pathname === '/creators') {
+    window.location.replace('/register?role=influencer');
+  }
 });
+
 
 
 
